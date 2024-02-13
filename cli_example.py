@@ -90,7 +90,7 @@ if (sys.argv[1] == '-p' or sys.argv[1] == '--play') and argvlen >= 3:
     sys.exit(0)
 
 # Code for listing all available sounds with the command "-all"
-if (sys.argv[1] == '-all'):
+if (sys.argv[1] == '--all'):
     directory = "sounds"
     files = os.listdir(directory)
     for file in files:
