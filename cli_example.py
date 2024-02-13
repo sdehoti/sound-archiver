@@ -46,6 +46,7 @@ if argvlen<=1 or sys.argv[1]=='--help' or sys.argv[1]=='-h':
     print("usage:",sys.argv[0], '--help')
     print('-h     : print this help message and exit (also --help)')
     print('-p     : plays one or more .wav files (also --play)')
+    print('-all   : lists all the available files in the sounds directory')
 
     # Note that it is proper hygiene to have this at the end of each
     sys.exit(0);
