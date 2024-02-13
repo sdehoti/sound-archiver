@@ -11,6 +11,7 @@ Optionally, additional arguments may come after the name of the program, those a
 '''
 
 import sys
+import os
 import simpleaudio as sa
 from simpleaudio_test import play_sound
 argvlen = len(sys.argv)
@@ -88,7 +89,13 @@ if (sys.argv[1] == '-p' or sys.argv[1] == '--play') and argvlen >= 3:
         play_sound(sound)
     sys.exit(0)
 
-
+# Code for listing all available sounds with the command "-all"
+if (sys.argv[1] == '-all'):
+    directory = "sounds"
+    files = os.listdir(directory)
+    for file in files:
+        print(file) 
+    sys.exit(0)
 
 '''
 This goes at the end of all of your if statements and it lets you know if you have 
