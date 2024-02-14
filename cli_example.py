@@ -11,6 +11,7 @@ Optionally, additional arguments may come after the name of the program, those a
 '''
 
 import sys
+import os
 import simpleaudio as sa
 from simpleaudio_test import play_sound, play_sounds_at_once
 argvlen = len(sys.argv)
@@ -46,6 +47,7 @@ if argvlen<=1 or sys.argv[1]=='--help' or sys.argv[1]=='-h':
     print('-h     : print this help message and exit (also --help)')
     print('-p     : plays one or more .wav files (also --play)')
     print('-ls    : plays one or more .wav files simultaneously (also --layersounds)')
+    print('-all   : lists all the available files in the sounds directory')
 
     # Note that it is proper hygiene to have this at the end of each
     sys.exit(0);
@@ -94,6 +96,13 @@ if (sys.argv[1] == '-ls' or sys.argv[1] == '--layersounds') and argvlen >= 3:
 
 
 
+# Code for listing all available sounds with the command "-all"
+if (sys.argv[1] == '--all'):
+    directory = "sounds"
+    files = os.listdir(directory)
+    for file in files:
+        print(file) 
+    sys.exit(0)
 
 '''
 This goes at the end of all of your if statements and it lets you know if you have 
