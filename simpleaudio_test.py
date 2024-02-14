@@ -10,7 +10,6 @@ import os
 # This is a test sound file
 def play_sound(filename):
     try:
-        print("This is sound's name: " + filename)
         wave_obj = sa.WaveObject.from_wave_file(filename)
         print("I am now playing " + filename)
         print(wave_obj)
