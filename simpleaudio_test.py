@@ -3,6 +3,7 @@ Created for CS-370 Lab Week 3
 This is the most basic example of how to play a file using the simpleaudio package
 '''
 
+import sounds as sounds
 import simpleaudio as sa
 import os
 
@@ -18,6 +19,16 @@ def play_sound(filename):
     except:
         print('Invalid filepath')
 
+def play_sounds_at_once(filenames):
+    waveObjects = []
+    for filename in filenames:
+        waveObjects.append(sa.WaveObject.from_wave_file(filename))
+    playObjects = []
+    for wave in waveObjects:
+        playObjects.append(wave.play())
+    for play in playObjects:
+        play.wait_done()
+
 def rename_sound_file(old_name, new_name):
     try:
         os.rename(old_name, new_name)
@@ -31,4 +42,6 @@ def rename_sound_file(old_name, new_name):
 TODO: Re-write the above as a function that takes in a filename/filepath as an argument
 and plays the sound file
 '''
+
+
 

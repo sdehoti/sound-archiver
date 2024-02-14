@@ -12,7 +12,7 @@ Optionally, additional arguments may come after the name of the program, those a
 
 import sys
 import simpleaudio as sa
-from simpleaudio_test import play_sound
+from simpleaudio_test import play_sound, play_sounds_at_once
 argvlen = len(sys.argv)
 
 '''
@@ -45,6 +45,7 @@ if argvlen<=1 or sys.argv[1]=='--help' or sys.argv[1]=='-h':
     print("usage:",sys.argv[0], '--help')
     print('-h     : print this help message and exit (also --help)')
     print('-p     : plays one or more .wav files (also --play)')
+    print('-ls    : plays one or more .wav files simultaneously (also --layersounds)')
 
     # Note that it is proper hygiene to have this at the end of each
     sys.exit(0);
@@ -84,9 +85,13 @@ For now, just have it print out the statement:
 
 # ADD YOUR CODE FOR PLAY HERE
 if (sys.argv[1] == '-p' or sys.argv[1] == '--play') and argvlen >= 3:
-    for sound in sys.argv[2:]:
-        play_sound(sound)
+    play_sound(sys.argv[2])
     sys.exit(0)
+
+if (sys.argv[1] == '-ls' or sys.argv[1] == '--layersounds') and argvlen >= 3:
+    play_sounds_at_once(sys.argv[2:])
+    sys.exit(0)
+
 
 
 
