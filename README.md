@@ -14,7 +14,16 @@ or
 ```
 python3 cli_example.py -h
 ```
+For commands that require an additional argument, it can be included at the end of the prompt.
+For example this prompt will play the toaster.wav audio file:
+```
+python cli_example.py -p ./sounds/toaster.wav
+```
+The argument can also be passed as a list of different WAV audio files
+```
+python cli_example.py -p ./sounds/*.wav
+```
 ## Testing
 
 ## Challenges
-One of the biggest challenges we have overcome was the implementation of the play_sounds_at_once function. 
+One of the biggest challenges we have overcome was the implementation of the play_sounds_at_once function. After reading the official documentation of the simpleaudio library, we have used the conversion function to conver the individual audio files into Wave objects that are played one by one in a very short amount of time so that they layer on top of each other.
