@@ -9,6 +9,7 @@ import os
 
 # This is a test sound file
 def play_sound(filename):
+    # Tries 
     try:
         wave_obj = sa.WaveObject.from_wave_file(filename)
         print("I am now playing " + filename)
@@ -18,15 +19,28 @@ def play_sound(filename):
     except:
         print('Invalid filepath')
 
+# Play multiple audio files on top of each other
 def play_sounds_at_once(filenames):
     waveObjects = []
+    # Creates an array of Wave ojects from provided file paths
     for filename in filenames:
-        waveObjects.append(sa.WaveObject.from_wave_file(filename))
+        try:
+            waveObjects.append(sa.WaveObject.from_wave_file(filename))
+        except:
+            continue
     playObjects = []
+    # Creates an array of played Wave objects and plays them
     for wave in waveObjects:
-        playObjects.append(wave.play())
+        try:
+            playObjects.append(wave.play())
+        except:
+            continue
+    # The function waits until all sounds have been played
     for play in playObjects:
-        play.wait_done()
+        try:
+            play.wait_done()
+        except:
+            continue
 
 def rename_sound_file(old_name, new_name):
     try:
@@ -37,10 +51,7 @@ def rename_sound_file(old_name, new_name):
     except FileExistsError:
         print(f"File '{new_name}' already exists.")
 
-'''
-TODO: Re-write the above as a function that takes in a filename/filepath as an argument
-and plays the sound file
-'''
+
 
 
 

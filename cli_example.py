@@ -72,10 +72,7 @@ For example, if we want to play a file, we should construct a new if statement t
 enter into the command line:
 >> python cli_example.py --play sounds/toaster.wav
 >> python cli_example.py -p sounds/coffee.wav
-'''
 
-# TODO: Add in the play command by writing a new if statement
-'''
 You can use count as a template/example.
 For now, it doesn't have to actually play a file, but it should take in a filepath as an additional argument
 that comes after play (see the examples above).
