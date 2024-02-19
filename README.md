@@ -24,6 +24,7 @@ The argument can also be passed as a list of different WAV audio files
 python cli_example.py -p ./sounds/*.wav
 ```
 ## Testing
+For testing, we have written unit tests for the play_sound and play_sounds_at_once functions in the testing.py file. To implement these unit tests we have used the unittest library. We have decided to test the rename functionality of our program manually, as it requires us to restore each renamed file after we test it.
 
 ## Challenges
 One of the biggest challenges we have overcome was the implementation of the play_sounds_at_once function. After reading the official documentation of the simpleaudio library, we have used the conversion function to conver the individual audio files into Wave objects that are played one by one in a very short amount of time so that they layer on top of each other.
