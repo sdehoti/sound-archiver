@@ -1,9 +1,5 @@
 '''
-CS-370 lab activity for Jan. 30, 2024
-This file includes a sample example of how you can use sys.argv to parse command line arguments.
-sys.argv is a list containing all the items that have been typed on the command line for a particular invocation of a program.
 
-For example, you might type into the command line, to execute your python program:
 >> python myprogram.py --dostuff arguments
 
 sys.argv[0] is the name used to invoke the program (myprogram.py).
