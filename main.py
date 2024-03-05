@@ -1,9 +1,5 @@
 '''
-
->> python myprogram.py --dostuff arguments
-
-sys.argv[0] is the name used to invoke the program (myprogram.py).
-Optionally, additional arguments may come after the name of the program, those are sys.argv[1], etc.
+>> python main.py --dostuff arguments
 '''
 
 import sys
@@ -20,18 +16,8 @@ print("sys.argv: ", sys.argv)
 
 '''
 # HELP: This is a command line argument that is invoked by typing --help or -h
-(Note that it is a command line convention to offer full name and first letter options.
-The full name options have two preceding dashes -- and the one-letter options have just one -)
-For example:
->> python cli_example.py --help
->> python cli_example.py --h
-
-Right now, this help command is not very useful.
-Take a look at some other helps commands, like
->> python --help
->> pip -h
->> conda --help
-To see what they include.
+>> python main.py --help
+>> python main.py --h
 '''
 
 # This if statement checks to see what argument comes right after the program name
