@@ -4,6 +4,7 @@ This is the most basic example of how to play a file using the simpleaudio packa
 '''
 
 import sounds as sounds
+from zipfile import ZipFile
 import simpleaudio as sa
 import os
 
@@ -50,6 +51,17 @@ def rename_sound_file(old_name, new_name):
         print(f"File '{old_name}' not found.")
     except FileExistsError:
         print(f"File '{new_name}' already exists.")
+
+def zip_files(audio_files):
+# audio_files: str list of audio file paths
+    try:
+        zip = ZipFile("./export/export.zip", "w")
+        for file in audio_files:
+            zip.write(file, arcname=file.split('/')[-1])
+        zip.close()
+    except:
+        print("Cannot ZIP files")
+
 
 
 
