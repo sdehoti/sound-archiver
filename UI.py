@@ -14,7 +14,7 @@ def display_menu():
     print("Welcome to the Sound Archive Management System\n")
     print("1. Play one or more .wav files")
     print("2. Play multiple .wav files simultaneously")
-    print("3. List all available files in the sounds directory")
+    print("3. List all available files in the directory")
     print("4. Create a folder and move .wav files into it")
     print("5. Delete a folder")
     print("6. Remove a specific file from a folder")
@@ -37,6 +37,13 @@ def list_available_files(folder_name):
         print(file)  # Print each file individually
 
     input("Press Enter to continue...")
+
+def list_available_folders():
+    print("Available folders:")
+    folders = [folder for folder in os.listdir() if os.path.isdir(folder)]
+    for i, folder in enumerate(folders, 1):
+        print(f"{i}. {folder}")
+    return folders
 
 
 def create_folder(folder_name, file_paths):
@@ -107,8 +114,13 @@ def main():
             files = input().split()
             play_files_simultaneously(files)
         elif choice == '3':
-            folder_name = input("Enter folder name: ")
-            list_available_files(folder_name)
+            folders = list_available_folders()
+            folder_choice = input("Enter the number of the folder: ")
+            try:
+                selected_folder = folders[int(folder_choice) - 1]
+                list_available_files(selected_folder)
+            except IndexError:
+                print("Invalid folder choice. Please try again.")
         elif choice == '4':
             print("Enter the folder name:")
             folder_name = input()
@@ -132,7 +144,6 @@ def main():
             new_name = input()
             rename_sound(current_name, new_name)
         elif choice == '8':
-            # Option 9: Add files to an existing folder
             folder_name = input("Enter the folder name: ")
             print("Enter the file path(s) separated by spaces:")
             files = input().split()
