@@ -1,6 +1,6 @@
 import unittest
 import time 
-from simpleaudio_test import play_sound, play_sounds_at_once
+from share_file import play_sound, play_sounds_at_once
 
 filename1 = 'sounds/coffee.wav'
 filename2 = 'sounds/toaster.wav'
