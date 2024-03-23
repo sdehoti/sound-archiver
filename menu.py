@@ -2,7 +2,7 @@ import os
 
 class Menu:
     def display(self):
-        print("Welcome to the Sound Archive Management System\n")
+        print("Welcome to the Sound Archive Management System\n.Your current working directory is: ", os.getcwd())
         print("-p : Play one or more .wav files")
         print("-ps : Play multiple .wav files simultaneously")
         print("-l : List all available files in the directory")
@@ -13,6 +13,10 @@ class Menu:
         print("-rn : Rename a sound file")
         print("-rn dir :  Rename a sound folder")
         print("-zip : Compress selected sounds files into a .zip file")
+        print("-sortz : Sort files by size")
+        print("-sorta : Sort files alphabetically")
+        print("-sortc : Sort files by date created")
+        print("-sortm : Sort files by date modified")
         print("-exit : Exit\n")
 
     def get_choice(self):
