@@ -5,24 +5,35 @@ CS370 Final Project for team Global United
 - Shahrom: Contributed to rename_sounds_file in simpleaudio_test.py and testing.py
 - Terence
 - Zurain
+
 ## How To Use
-Our program uses a command line interface. To access the CLI features, the user has to navigate to the code directory where the cli_example.py file is located. The user can then run the following prompt in the command line to view all of the possible commands in the sound archive.
+Our program uses a command line interface and to make use of it, the source files need to be in the same directory as the 
+audio library. To make use of the program; 
+
+- run python main.py
 ```
-python cli_example.py -h
+    Welcome to the Sound Archive Management System.
+    Your current working directory is:  /Users/path/GlobalUnited/
+    -p : Play one or more .wav files
+    -ps : Play multiple .wav files simultaneously
+    -l : List all available files in the directory
+    -add : Add files to existing folder
+    -cr : Create a folder and move .wav files into it
+    -rm : Remove a specific file from a folder
+    -rm dir : Delete a folder
+    -rn : Rename a sound file
+    -rn dir :  Rename a sound folder
+    -zip : Compress selected sounds files into a .zip file
+    -sortz : Sort files by size
+    -sorta : Sort files alphabetically
+    -sortc : Sort files by date created
+    -sortm : Sort files by date modified
+    -exit : Exit
+
+    Choose one of the listed options: 
 ```
-or
-```
-python3 cli_example.py -h
-```
-For commands that require an additional argument, it can be included at the end of the prompt.
-For example this prompt will play the toaster.wav audio file:
-```
-python cli_example.py -p ./sounds/toaster.wav
-```
-The argument can also be passed as a list of different WAV audio files
-```
-python cli_example.py -p ./sounds/*.wav
-```
+- choose an option from the menu by responding with corresponding command, for example, to play a sound, you respond with "p". Thereafter, you will enter the path of the sound(s) you want to play which can be "./sounds/*.wav" or "sounds/*.wav sounds/**.wav". 
+
 ## Testing
 For testing, we have written unit tests for the play_sound and play_sounds_at_once functions in the testing.py file. To implement these unit tests we have used the unittest library. We have decided to test the rename functionality of our program manually, as it requires us to restore each renamed file after we test it.
 
