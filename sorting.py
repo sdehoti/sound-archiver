@@ -46,4 +46,10 @@ class Sort:
             print(f"{file} : {datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')}")
         input("Press enter to continue...")
 
-
+    def sort_type(self, choice):
+        methods = {
+            'sortz': self.sort_size,
+            'sortc': self.sort_date_created,
+            'sortm': self.sort_date_modified,
+            'sorta': self.sort_name}
+        return methods[choice]()
