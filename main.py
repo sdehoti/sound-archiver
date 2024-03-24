@@ -71,16 +71,8 @@ def main():
         if choice[0:4] == "sort":
             path = input("Enter the path of the folder to sort:")
             sort = sorting.Sort(path)
-            if choice == 'sortz':
-                sort.sort_size()
-            if choice == 'sortd':
-                sort.sort_date_created()
-            if choice == 'sortm':
-                sort.sort_date_modified()
-            if choice == 'sorta':
-                sort.sort_name()
-
-
+            sort.sort_type(choice)
+ 
         if choice == 'exit':
             print("Exiting...")
             sys.exit(0)
