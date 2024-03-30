@@ -5,6 +5,7 @@ class Menu:
         print("Welcome to the Sound Archive Management System\n.Your current working directory is: ", os.getcwd())
         print("-p : Play one or more .wav files")
         print("-ps : Play multiple .wav files simultaneously")
+        print("-pr : Play a .wav file in reverse")
         print("-l : List all available files in the directory")
         print("-add : Add files to existing folder")
         print("-cr : Create a folder and move .wav files into it")
