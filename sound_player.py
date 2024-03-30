@@ -1,4 +1,6 @@
 import simpleaudio as sa
+import wave
+import audioop
 
 class SoundPlayer:
     def play_files(self, file_paths):
@@ -9,6 +11,7 @@ class SoundPlayer:
                 print(wave_obj)
                 play_obj = wave_obj.play()
                 play_obj.wait_done()
+                input("Press Enter to continue...")
             except:
                 print('Invalid filepath')
 
@@ -33,3 +36,26 @@ class SoundPlayer:
                 play.wait_done()
             except:
                 continue
+        
+    def play_reverse(self, file_path):
+        
+        # Open the WAV file
+        with wave.open(file_path, 'rb') as wav_file:
+            # Extract audio data
+            sample_width = wav_file.getsampwidth()
+            num_channels = wav_file.getnchannels()
+            frame_rate = wav_file.getframerate()
+            num_frames = wav_file.getnframes()
+            audio_data = wav_file.readframes(num_frames)
+            
+            # Reverse audio data
+            reversed_audio_data = audioop.reverse(audio_data, sample_width)
+
+    
+        wave_obj = sa.WaveObject(reversed_audio_data, num_channels,sample_width, frame_rate)
+        print("I am now playing " + file_path)
+        print(wave_obj)
+        play_obj = wave_obj.play()
+        play_obj.wait_done()
+        input("Press Enter to continue...")
+        

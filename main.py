@@ -72,6 +72,10 @@ def main():
             path = input("Enter the path of the folder to sort:")
             sort = sorting.Sort(path)
             sort.sort_type(choice)
+        
+        if choice == 'pr':
+            file_path = input("Enter the file path:")
+            sound_player.play_reverse(file_path)
  
         if choice == 'exit':
             print("Exiting...")
