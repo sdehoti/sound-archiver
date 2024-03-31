@@ -7,7 +7,7 @@ CS370 Final Project for team Global United
 - Zurain
 
 ## How To Use
-Our program uses a command line interface and to make use of it, the source files need to be in the same directory as the 
+Our program uses a command line interface; to use it, the source files need to be in the same directory as the 
 audio library. To make use of the program; 
 
 - run python main.py
@@ -16,6 +16,7 @@ audio library. To make use of the program;
     Your current working directory is:  /Users/path/GlobalUnited/
     -p : Play one or more .wav files
     -ps : Play multiple .wav files simultaneously
+    -pr : Play a .wav file in reverse
     -l : List all available files in the directory
     -add : Add files to existing folder
     -cr : Create a folder and move .wav files into it
@@ -32,10 +33,10 @@ audio library. To make use of the program;
 
     Choose one of the listed options: 
 ```
-- choose an option from the menu by responding with corresponding command, for example, to play a sound, you respond with "p". Thereafter, you will enter the path of the sound(s) you want to play which can be "./sounds/*.wav" or "sounds/*.wav sounds/**.wav". 
+- choose an option from the menu by responding with the corresponding command, for example, to play a sound, you respond with "p". Thereafter, you will enter the path of the sound(s) you want to play which can be "./sounds/*.wav" or "sounds/*.wav sounds/**.wav". 
 
 ## Testing
-For testing, we have written unit tests for the play_sound and play_sounds_at_once functions in the testing.py file. To implement these unit tests we have used the unittest library. We have decided to test the rename functionality of our program manually, as it requires us to restore each renamed file after we test it.
+For testing, we have written unit tests for the play_sound and play_sounds_at_once functions in the testing.py file. To implement these unit tests we have used the unittest library. We have decided to manually test our program's rename functionality, as it requires us to restore each renamed file after we test it.
 
 ## Challenges
-One of the biggest challenges we have overcome was the implementation of the play_sounds_at_once function. After reading the official documentation of the simpleaudio library, we have used the conversion function to conver the individual audio files into Wave objects that are played one by one in a very short amount of time so that they layer on top of each other.
+One of the biggest challenges we have overcome was implementing the play_sounds_at_once function. After reading the official documentation of the simpleaudio library, we have used the conversion function to convert the individual audio files into Wave objects played one by one in a very short amount of time so that they layer on top of each other.
