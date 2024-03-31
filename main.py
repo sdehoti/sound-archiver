@@ -65,7 +65,7 @@ def main():
             file_manager.rename_folder(current_name, new_name)
             
         if choice == 'zip':
-            filenames = input("Enter the file path(s) separated by spaces:")
+            filenames = input("Enter the Folder path to be zipped or seperate file path(s), separated by spaces, of the audios:")
             share_file.zip_files(filenames.split())
         
         if choice[0:4] == "sort":

@@ -1,13 +1,12 @@
 import os
 from zipfile import ZipFile
 
-## Current issue is that if you export two files at the same time, the second file will overwrite the first file. Is there a way to fix this?
-## Is there way to name the exported file with the name of the folder that the files are in or maybe something unique?
 class ShareFiles:
     def zip_files(self, files):
-    # files: str list of audio file path(s) or directory path(s)
+        export_name = input("Enter the name of the export file: ") + ".zip" #creating a unique name for the zip file so that it does not overwrite any existing files. 
+        export_path = "./export/" + export_name
         try:
-            zip = ZipFile("./export/export.zip", "w")
+            zip = ZipFile(export_path, "w")
             for file in files:
                 if file[-4:] == '.wav':
                     zip.write(file, arcname=file.split('/')[-1])
@@ -21,6 +20,8 @@ class ShareFiles:
                             zip.write(path, arcname=os.path.relpath(path, start=os.path.dirname(file)))
                 
             zip.close()
+            print("ZIP file created successfully.")
+            input("Press Enter to continue...")
         except:
             print("Could not ZIP: " + file)
 
