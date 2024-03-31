@@ -3,7 +3,7 @@ CS370 Final Project for team Global United
 ## Team Members
 - Fabian: Contributed to the play_sound and play_sounds_at_once functions in simpleaudio_test.py.
 - Shahrom: Contributed to rename_sounds_file in simpleaudio_test.py and testing.py
-- Terence
+- Terence: Contributed to sound_player, testing and sorting modules.
 - Zurain
 
 ## How To Use
