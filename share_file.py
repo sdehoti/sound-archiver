@@ -3,7 +3,7 @@ from zipfile import ZipFile
 
 class ShareFiles:
     def zip_files(self, files):
-        export_name = input("Enter the name of the export file: ") + ".zip"
+        export_name = input("Enter the name of the export file: ") + ".zip" #creating a unique name for the zip file so that it does not overwrite any existing files. 
         export_path = "./export/" + export_name
         try:
             zip = ZipFile(export_path, "w")
