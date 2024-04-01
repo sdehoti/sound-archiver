@@ -1,6 +1,7 @@
 import simpleaudio as sa
 import wave
 import audioop
+import random
 
 class SoundPlayer:
     def play_files(self, file_paths):
@@ -68,7 +69,20 @@ class SoundPlayer:
                 num_channels = wav_file.getnchannels()
                 frame_rate = wav_file.getframerate()
                 num_frames = wav_file.getnframes()
-                audio_data = wav_file.readframes(num_frames)
 
+                # Randomly select a segment of the sound
+                start_frame = random.randint(0,num_frames // 2)
+                wav_file.setpos(start_frame)
+                audio_data = wav_file.readframes(num_frames // 2)
+
+    
+            wave_obj = sa.WaveObject(audio_data, num_channels,sample_width, frame_rate)
+            print("I am now playing " + file_path)
+            print(wave_obj)
+            play_obj = wave_obj.play()
+            play_obj.wait_done()
+            input("Press Enter to continue...")
         except:
             print('Invalid filepath')
+
+SoundPlayer.play_sound_segment(SoundPlayer,'./sounds/coffee.wav')
