@@ -4,7 +4,7 @@ CS370 Final Project for team Global United
 - Fabian: Contributed to sound_player, testing and share_file module.
 - Shahrom: Contributed to testing files, refactoring and adding features the sounds files and folders manipulations
 - Terence: Contributed to sound_player, testing and sorting modules.
-- Zurain: Contributed to adding functionalities regarding organizing folders
+- Zurain: Contributed to adding functionalities regarding organizing folders and making the UI for the archive
 
 ## How To Use
 Our program uses a command line interface; to use it, the source files need to be in the same directory as the 
