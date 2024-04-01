@@ -2,9 +2,9 @@
 CS370 Final Project for team Global United
 ## Team Members
 - Fabian: Contributed to the play_sound and play_sounds_at_once functions in simpleaudio_test.py.
-- Shahrom: Contributed to rename_sounds_file in simpleaudio_test.py and testing.py
+- Shahrom: Contributed to testing files, refactoring and adding features the sounds files and folders manipulations
 - Terence: Contributed to sound_player, testing and sorting modules.
-- Zurain
+- Zurain: Contributed to adding functionalities regarding organizing folders
 
 ## How To Use
 Our program uses a command line interface; to use it, the source files need to be in the same directory as the 
