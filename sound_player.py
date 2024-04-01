@@ -59,3 +59,16 @@ class SoundPlayer:
         play_obj.wait_done()
         input("Press Enter to continue...")
         
+    def play_sound_segment(self, file_path):
+        try:
+            # Open the WAV file
+            with wave.open(file_path, 'rb') as wav_file:
+                # Extract audio data
+                sample_width = wav_file.getsampwidth()
+                num_channels = wav_file.getnchannels()
+                frame_rate = wav_file.getframerate()
+                num_frames = wav_file.getnframes()
+                audio_data = wav_file.readframes(num_frames)
+
+        except:
+            print('Invalid filepath')
