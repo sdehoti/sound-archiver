@@ -6,6 +6,7 @@ class Menu:
         print("-p : Play one or more .wav files")
         print("-ps : Play multiple .wav files simultaneously")
         print("-pr : Play a .wav file in reverse")
+        print("-pseg : Play a randomly chosen segment of a .wav file")
         print("-l : List all available files in the directory")
         print("-add : Add files to existing folder")
         print("-cr : Create a folder and move .wav files into it")

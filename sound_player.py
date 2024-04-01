@@ -87,5 +87,3 @@ class SoundPlayer:
             input("Press Enter to continue...")
         except:
             print('Invalid filepath')
-
-SoundPlayer.play_sound_segment(SoundPlayer,'./sounds/coffee.wav')
