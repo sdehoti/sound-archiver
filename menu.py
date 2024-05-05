@@ -1,7 +1,14 @@
 import os
 
 class Menu:
+    """
+    A class to display a menu and handle user choices for the Sound Archive Management System.
+    """
+
     def display(self):
+        """
+        Display the main menu options.
+        """
         print("Welcome to the Sound Archive Management System\n.Your current working directory is: ", os.getcwd())
         print("-p : Play one or more .wav files")
         print("-ps : Play multiple .wav files simultaneously")
@@ -22,9 +29,18 @@ class Menu:
         print("-exit : Exit\n")
 
     def get_choice(self):
+        """
+        Get user choice from the menu.
+
+        Returns:
+            str: User's choice.
+        """
         return input("Choose one of the listed options: ")
 
     def clear_screen(self):
+        """
+        Clear the terminal screen.
+        """
         if os.name == 'posix':
             _ = os.system('clear')
         else:
