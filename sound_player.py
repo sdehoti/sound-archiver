@@ -4,7 +4,22 @@ import audioop
 import random
 
 class SoundPlayer:
+    """
+    SoundPlayer class provides methods to play audio files, reverse audio, and play random segments of audio files.
+    """
     def play_files(self, file_paths):
+        """
+        Plays audio files sequentially.
+
+        Parameters:
+            file_paths (list): List of file paths to audio files.
+
+        Returns:
+            None
+
+        Raises:
+            None
+        """
         for filename in file_paths:
             try:
                 wave_obj = sa.WaveObject.from_wave_file(filename)
@@ -17,6 +32,18 @@ class SoundPlayer:
                 print('Invalid filepath')
 
     def play_files_simultaneously(self, file_paths):
+        """
+        Plays audio files simultaneously.
+
+        Parameters:
+            file_paths (list): List of file paths to audio files.
+
+        Returns:
+            None
+
+        Raises:
+            None
+        """
         waveObjects = []
         # Creates an array of Wave ojects from provided file paths
         for filename in file_paths:
@@ -39,6 +66,18 @@ class SoundPlayer:
                 continue
         
     def play_reverse(self, file_path):
+        """
+        Plays the reversed version of an audio file.
+
+        Parameters:
+            file_path (str): File path to the audio file.
+
+        Returns:
+            None
+
+        Raises:
+            None
+        """
         try:
             # Open the WAV file
             with wave.open(file_path, 'rb') as wav_file:
@@ -64,6 +103,18 @@ class SoundPlayer:
              print('Invalid filepath')
         
     def play_sound_segment(self, file_path):
+        """
+        Plays a random segment of an audio file.
+
+        Parameters:
+            file_path (str): File path to the audio file.
+
+        Returns:
+            None
+
+        Raises:
+            None
+        """
         try:
             # Open the WAV file
             with wave.open(file_path, 'rb') as wav_file:
