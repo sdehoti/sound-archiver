@@ -27,13 +27,17 @@ class SoundPlayer(customtkinter.CTk):
 
 
     def create_widgets(self):
-        self.playlists()
-        self.features()
+        self.playlists_widget()
+        self.features_widget()
 
 
 
+    def playlists_widget(self):
+        self.playlist_frame = customtkinter.CTkScrollableFrame(self, label_text="Playlists")
+        self.playlist_frame.grid(row=0, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
+        self.playlist_frame.grid_columnconfigure(0, weight=1)
 
-    def features(self):
+    def features_widget(self):
         self.features_frame = customtkinter.CTkFrame(self)
         self.features_frame.grid(row=1, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
         self.features_frame_label = customtkinter.CTkLabel(self.features_frame, text="Tools", font= ("Arial", 16))
@@ -46,12 +50,13 @@ class SoundPlayer(customtkinter.CTk):
         self.edit_sound_button()
         self.record_sound_button()
 
+
     def create_playlist_button(self):
-        self.create_playlist_button = customtkinter.CTkButton(master=self.features_frame, text="Create Playlist", command=gt.on_create_playlist)
+        self.create_playlist_button = customtkinter.CTkButton(master=self.features_frame, text="Create Playlist", command=lambda: gt.on_create_playlist(self))
         self.create_playlist_button.grid(row=1, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
     
     def sort_playlist_button(self):
-        self.sort_playlist_button = customtkinter.CTkButton(master=self.features_frame, text="Sort Playlist", command=gt.on_sort_playlist)
+        self.sort_playlist_button = customtkinter.CTkButton(master=self.features_frame, text="Sort Playlist", command=lambda: gt.on_sort_playlis(self))
         self.sort_playlist_button.grid(row=2, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
 
     def edit_sound_button(self):
@@ -67,17 +72,8 @@ class SoundPlayer(customtkinter.CTk):
         self.delete_playlist_button.grid(row=5, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
 
      
-    def playlists(self):
-        self.playlist_frame = customtkinter.CTkScrollableFrame(self, label_text="Playlists")
-        self.playlist_frame.grid(row=0, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
-        self.playlist_frame.grid_columnconfigure(0, weight=1)
-
-        for i in range(10):  # Adjust this for the number of playlists you need
-            button = customtkinter.CTkButton(master=self.playlist_frame, 
-                                            text=f"Playlist {i + 1}",
-                                            command=self.update_sounds(f"Playlist {i + 1}"))
-            button.grid(row=i, column=0, padx=10, pady=10) # Adjust padx and pady as needed
-
+   
+        
 
     
 
