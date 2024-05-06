@@ -1,3 +1,4 @@
+import customtkinter
 
 
 class Tools:
@@ -25,8 +26,19 @@ class Tools:
     def on_record_sound(self):
         pass
 
-    def on_create_playlist(self):
-        pass
+    def on_create_playlist(self, object):
+
+        dialog = customtkinter.CTkInputDialog(text="Enter the name of the playlist: ", title="Create Playlist")
+        playlist_name = dialog.get_input()
+
+        if playlist_name:
+            button = customtkinter.CTkButton(master=object.playlist_frame, 
+                                            text=playlist_name,
+                                            command=object.update_sounds(playlist_name))
+            button.grid(row=object.playlist_frame.grid_size()[1], column=0, padx=5, pady=5)
+
+
+        
 
     def update_sounds(self, playlist):
         pass
