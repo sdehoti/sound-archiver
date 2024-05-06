@@ -12,21 +12,49 @@ class SoundPlayer(customtkinter.CTk):
         super().__init__()
 
         self.title("Sound Player")
-        self.geometry("800x600")
-        self.grid_columnconfigure(0, weight=0)
-        self.grid_columnconfigure(1, weight=1)
-        self.grid_rowconfigure(0, weight=1)
+        self.geometry("1100x580")
+
+        self.grid_columnconfigure((1), weight=1)
+        self.grid_columnconfigure((0,2), weight=0)
+
+        self.number_of_playlists = 0
+        
+       
 
 
         self.create_widgets()
 
 
     def create_widgets(self):
+        self.playlists()
 
-        self.playlist_frame = customtkinter.CTkFrame(self, width=100, height=300) 
-        self.playlist_frame.grid(row=0, column=0, rowspan=2,sticky="nsew")
-        self.title_label = customtkinter.CTkLabel(self.playlist_frame, text="Playlist", font=("Arial", 12))
-        self.title_label.grid(row=0, column=0, padx=10, pady=10,sticky="nsew")
+
+
+
+    def create_playlist_button(self):
+        self.create_playlist_button = customtkinter.CTkButton(self, text="Create Playlist", command=self.on_create_playlist)
+        self.create_playlist_button.grid(row=1, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
+
+        
+    def playlists(self):
+        self.playlist_frame = customtkinter.CTkScrollableFrame(self, label_text="Playlists")
+        self.playlist_frame.grid(row=0, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
+        self.playlist_frame.grid_columnconfigure(0, weight=1)
+
+        for i in range(10):  # Adjust this for the number of playlists you need
+            button = customtkinter.CTkButton(master=self.playlist_frame, 
+                                            text=f"Playlist {i + 1}",
+                                            command=lambda i=i: self.update_sounds(f"Playlist {i + 1}"))
+            button.grid(row=i, column=0, padx=10, pady=10) # Adjust padx and pady as needed
+
+
+    def on_create_playlist(self):
+        tkinter.messagebox.showinfo("Create Playlist", "Create Playlist button clicked")
+
+    def update_sounds(self, playlist):
+        pass
+        # self.sounds_treeview.delete(*self.sounds_treeview.get_children())
+        # for i in range(10):
 
 
 
