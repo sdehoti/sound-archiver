@@ -2,6 +2,8 @@ import customtkinter
 import tkinter as tk
 import tkinter.messagebox
 from tools import Tools
+import os
+import shutil
 
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
@@ -17,9 +19,12 @@ class SoundPlayer(customtkinter.CTk):
 
         self.grid_columnconfigure((1), weight=1)
         self.grid_columnconfigure((0,2), weight=0)
+    
 
         self.number_of_playlists = 0
         self.playlists = []
+
+        self.sounds = os.listdir("sounds")
 
         self.create_widgets()
 
@@ -64,6 +69,15 @@ class SoundPlayer(customtkinter.CTk):
         self.sounds_treeview.grid(row=1, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
         self.sounds_frame.grid_rowconfigure(1, weight=1)
 
+        for i, sound in enumerate(self.sounds, 1):
+            sound_stats = os.stat(f"sounds/{sound}")
+            sound_size = sound_stats.st_size
+            sound_date_created = sound_stats.st_ctime
+            sound_date_last_modified = sound_stats.st_mtime
+
+            self.sounds_treeview.insert("", tk.END, values=(i, sound, "Unknown", f"{sound_size / 1024:.2f} KB", sound_date_created, sound_date_last_modified))
+        #self.sounds_treeview.insert("", tkinter.END, values=("1", "Song 1", "Artist 1", "3.5 MB", "12/12/2020", "12/12/2020"))
+
         # self.sounds_treeview.insert("", tkinter.END, values=("Song 1", "Artist 1", "3.5 MB"))
         # self.sounds_treeview.insert("", tkinter.END, values=("Song 2", "Artist 2", "4.2 MB"))
         # self.sounds_treeview.insert("", tkinter.END, values=("Song 3", "Artist 3", "2.1 MB"))
@@ -76,8 +90,7 @@ class SoundPlayer(customtkinter.CTk):
         self.player_controls_frame.grid_columnconfigure(0, weight=1)
 
 
-        #Instead of using buttons for controls, use icons for play, stop, pause, and resume
-       
+        #Instead of using buttons for controls, use icons for play, stop, pause, and resume       
 
     def features_widget(self):
         self.features_frame = customtkinter.CTkFrame(self)
@@ -124,8 +137,7 @@ class SoundPlayer(customtkinter.CTk):
 
     def update_sounds(self, playlist):
         pass
-        # self.sounds_treeview.delete(*self.sounds_treeview.get_children())
-        # for i in range(10):
+        
 
 
 
