@@ -2,11 +2,13 @@ import customtkinter
 import tkinter as tk
 import tkinter.messagebox
 from tools import Tools
+from player import Player
 
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
 
 gt = Tools()
+
 
 class SoundPlayer(customtkinter.CTk):
     def __init__(self):
@@ -69,12 +71,8 @@ class SoundPlayer(customtkinter.CTk):
         # self.sounds_treeview.insert("", tkinter.END, values=("Song 3", "Artist 3", "2.1 MB"))
 
     def player_controls_widget(self):
-        self.player_controls_frame = customtkinter.CTkFrame(self)
-        self.player_controls_frame.grid(row=1, column=1, padx=(5, 5), pady=(5, 5), sticky="nsew")
-        self.player_controls_frame_label = customtkinter.CTkLabel(self.player_controls_frame, text="Player Controls", font= ("Arial", 16))
-        self.player_controls_frame_label.grid(row=0, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
-        self.player_controls_frame.grid_columnconfigure(0, weight=1)
-
+        player = Player(master=self)
+        
 
         #Instead of using buttons for controls, use icons for play, stop, pause, and resume
        
