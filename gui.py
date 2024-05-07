@@ -4,6 +4,8 @@ import tkinter.messagebox
 from tools import Tools
 import os
 import shutil
+from tkinter import filedialog
+from datetime import datetime
 
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
@@ -50,19 +52,19 @@ class SoundPlayer(customtkinter.CTk):
         self.sounds_frame.grid_columnconfigure(0, weight=1)
 
         self.sounds_treeview = tk.ttk.Treeview(self.sounds_frame, columns=("name", "artist", "size", "date_created", "date_last_modified")) 
-        self.sounds_treeview.heading("#0", text="ID")
-        self.sounds_treeview.heading("name", text="Name")
-        self.sounds_treeview.heading("artist", text="Artist")
-        self.sounds_treeview.heading("size", text="Size")
-        self.sounds_treeview.heading("date_created", text="Date Created")
+        self.sounds_treeview.heading("#0", text="ID", anchor="w")
+        self.sounds_treeview.heading("name", text="Name", anchor="center")
+        self.sounds_treeview.heading("artist", text="Artist", anchor="center")
+        self.sounds_treeview.heading("size", text="Size", anchor="center")
+        self.sounds_treeview.heading("date_created", text="Date Created", anchor="w")
         self.sounds_treeview.heading("date_last_modified", text="Date Last Modified")
 
-        self.sounds_treeview.column("#0", width=50)
-        self.sounds_treeview.column("name", width=200)
-        self.sounds_treeview.column("artist", width=100)
-        self.sounds_treeview.column("size", width=50)
-        self.sounds_treeview.column("date_created", width=75)
-        self.sounds_treeview.column("date_last_modified", width=75)
+        self.sounds_treeview.column("#0", width=20, anchor="w")
+        self.sounds_treeview.column("name", width=70, anchor="w")
+        self.sounds_treeview.column("artist", width=70, anchor="w")
+        self.sounds_treeview.column("size", width=50,   anchor="w")
+        self.sounds_treeview.column("date_created", width=50, anchor="w")
+        self.sounds_treeview.column("date_last_modified", width=50, anchor="w")
 
 
 
@@ -72,15 +74,12 @@ class SoundPlayer(customtkinter.CTk):
         for i, sound in enumerate(self.sounds, 1):
             sound_stats = os.stat(f"sounds/{sound}")
             sound_size = sound_stats.st_size
-            sound_date_created = sound_stats.st_ctime
-            sound_date_last_modified = sound_stats.st_mtime
+            sound_date_created = datetime.fromtimestamp(sound_stats.st_ctime).strftime("%Y-%m-%d %H:%M:%S")
+            sound_date_last_modified = datetime.fromtimestamp(sound_stats.st_mtime).strftime("%Y-%m-%d %H:%M:%S")
 
             self.sounds_treeview.insert("", tk.END, values=(i, sound, "Unknown", f"{sound_size / 1024:.2f} KB", sound_date_created, sound_date_last_modified))
-        #self.sounds_treeview.insert("", tkinter.END, values=("1", "Song 1", "Artist 1", "3.5 MB", "12/12/2020", "12/12/2020"))
-
-        # self.sounds_treeview.insert("", tkinter.END, values=("Song 1", "Artist 1", "3.5 MB"))
-        # self.sounds_treeview.insert("", tkinter.END, values=("Song 2", "Artist 2", "4.2 MB"))
-        # self.sounds_treeview.insert("", tkinter.END, values=("Song 3", "Artist 3", "2.1 MB"))
+            self.sounds_treeview.bind("<Double-1>", lambda event: gt.on_play_sound(self))
+        
 
     def player_controls_widget(self):
         self.player_controls_frame = customtkinter.CTkFrame(self)
