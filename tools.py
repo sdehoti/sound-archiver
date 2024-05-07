@@ -36,15 +36,24 @@ class Tools:
                                             text=playlist_name,
                                             command=playlist.update_sounds(playlist_name))
             button.grid(row=playlist.playlist_frame.grid_size()[1], column=0, padx=5, pady=5)
-
+            playlist.playlists.append(playlist_name)
 
         
 
     def update_sounds(self, playlist):
         pass
 
-    def on_delete_playlist(self):
-        pass
+    def on_delete_playlist(self, soundplayer):
+        dialog = customtkinter.CTkInputDialog(text="Enter the name of the playlist to delete: ", title="Delete Playlist")
+        playlist_name = dialog.get_input()
+        if playlist_name in soundplayer.playlists:
+            soundplayer.playlists.remove(playlist_name)
+            for widget in soundplayer.playlist_frame.winfo_children():
+                if widget.cget("text") == playlist_name:
+                    widget.destroy()
+
+
+        
 
     def on_delete_sounds(self):
         pass

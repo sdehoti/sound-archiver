@@ -19,6 +19,7 @@ class SoundPlayer(customtkinter.CTk):
         self.grid_columnconfigure((0,2), weight=0)
 
         self.number_of_playlists = 0
+        self.playlists = []
 
         self.create_widgets()
 
@@ -90,6 +91,7 @@ class SoundPlayer(customtkinter.CTk):
         self.sort_playlist_button()
         self.edit_sound_button()
         self.record_sound_button()
+        self.delete_playlist_button()
 
 
     def create_playlist_button(self):
