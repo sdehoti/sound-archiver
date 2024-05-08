@@ -28,13 +28,16 @@ class SoundPlayer(customtkinter.CTk):
         self.playlists = {}
         self.current_playlist = []
 
-        self.sounds = os.listdir("sounds")
-        self.selected_sounds = []
+        
+        self.playlists["All_Sounds"] = os.listdir("sounds")
+     
+        
 
         self.create_widgets()
 
 
     def create_widgets(self):
+        # Create the main widgets for the application
         self.playlists_widget()
         self.features_widget()
         self.sounds_widget()
@@ -46,6 +49,10 @@ class SoundPlayer(customtkinter.CTk):
         self.playlist_frame = customtkinter.CTkScrollableFrame(self, label_text="Playlists")
         self.playlist_frame.grid(row=0, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
         self.playlist_frame.grid_columnconfigure(0, weight=1)
+        
+        self.all_sounds_button = customtkinter.CTkButton(master=self.playlist_frame, text="All Sounds", command=lambda: self.update_sounds("All_Sounds"))
+        self.all_sounds_button.grid(row=0, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
+       
 
     def sounds_widget(self):
         self.sounds_frame = customtkinter.CTkFrame(self)
@@ -78,21 +85,23 @@ class SoundPlayer(customtkinter.CTk):
        
 
         if self.current_playlist:
-            self.update_sounds(self.current_playlist)
+            
+            self.update_sounds("Current_Playlist")
         else:
-            self.update_sounds(self.sounds) 
+            self.update_sounds("All_Sounds") 
 
-        self.sounds_treeview.bind("<<TreeviewSelect>>", self.update_playlist) 
+        self.sounds_treeview.bind("<<TreeviewSelect>>", self.update_current_playlist) 
 
       
         
-    def update_playlist(self, event):
+    def update_current_playlist(self, event):
         self.current_playlist = []  
 
         selected_items = self.sounds_treeview.selection()
         for item in selected_items:
             sound_name = self.sounds_treeview.item(item, "values")[0]
-            self.current_playlist.append(sound_name) 
+            self.current_playlist.append(sound_name)
+        self.playlists["Current_Playlist"] = self.current_playlist 
 
         
         
@@ -149,9 +158,12 @@ class SoundPlayer(customtkinter.CTk):
 
    
 
-    def update_sounds(self, playlist):
-      
-       #self.sounds = playlist
+    def update_sounds(self, playlist_name):
+        
+
+        if playlist_name in self.playlists:
+            self.sounds = self.playlists[playlist_name]
+
         self.sounds_treeview.delete(*self.sounds_treeview.get_children())
         for i, sound in enumerate(self.sounds, 1):
             sound_stats = os.stat(f"sounds/{sound}")
