@@ -52,9 +52,10 @@ class Tools:
 
         playlist_name = tk.simpledialog.askstring("Create Playlist", "Enter a name for your playlist:")
         #need to keep track of the playlists created. 
-        soundplayer.playlists[playlist_name] = []
+        
 
         if playlist_name:  # Check if a name was provided
+            soundplayer.playlists[playlist_name] = []
             button = customtkinter.CTkButton(master=soundplayer.playlist_frame, 
                                             text=playlist_name,
                                             command= lambda: soundplayer.update_sounds(playlist_name))
