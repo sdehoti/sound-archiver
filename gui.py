@@ -80,8 +80,9 @@ class SoundPlayer(customtkinter.CTk):
         self.sounds_load_button = customtkinter.CTkButton(master=self.top_frame, text="Load Sounds", command=self.sounds_treeview_load)
         self.sounds_load_button.grid(row=0, column=1, padx=(5, 5), pady=(5, 5), sticky="ns")
 
-        self.sounds_treeview = tk.ttk.Treeview(self.sounds_frame, columns=("name", "artist", "size", "date_created", "date_last_modified")) 
-        self.sounds_treeview.heading("#0", text="ID", anchor="w")
+        self.sounds_treeview = tk.ttk.Treeview(self.sounds_frame, columns=('ID',"name", "artist", "size", "date_created", "date_last_modified"), show='headings') 
+
+        self.sounds_treeview.heading("ID", text="ID", anchor="center")
         self.sounds_treeview.heading("name", text="Name", anchor="center")
         self.sounds_treeview.heading("artist", text="Artist", anchor="center")
         self.sounds_treeview.heading("size", text="Size", anchor="center")
@@ -89,7 +90,7 @@ class SoundPlayer(customtkinter.CTk):
         self.sounds_treeview.heading("date_last_modified", text="Date Last Modified")
         
 
-        self.sounds_treeview.column("#0", width=20, anchor="w")
+        self.sounds_treeview.column("ID", width=30, anchor="w")
         self.sounds_treeview.column("name", width=70, anchor="w")
         self.sounds_treeview.column("artist", width=70, anchor="w")
         self.sounds_treeview.column("size", width=50,   anchor="w")
@@ -110,7 +111,7 @@ class SoundPlayer(customtkinter.CTk):
         self.sounds_treeview.bind("<<TreeviewSelect>>", self.update_current_playlist) 
 
     def sounds_treeview_load(self):
-       self.player.update([f"./sounds/{self.sounds_treeview.set(item, 'artist')}" for item in self.sounds_treeview.selection()])
+       self.player.update([f"./sounds/{self.sounds_treeview.set(item, 'name')}" for item in self.sounds_treeview.selection()])
 
         
     def update_current_playlist(self, event):
