@@ -21,7 +21,7 @@ class SoundPlayer(customtkinter.CTk):
         super().__init__()
 
         self.title("Sound Player")
-        self.geometry("1200x580")
+        self.geometry("1200x600")
 
         self.grid_columnconfigure((1), weight=1)
         self.grid_columnconfigure((0,2), weight=0)
@@ -71,9 +71,14 @@ class SoundPlayer(customtkinter.CTk):
     def sounds_widget(self):
         self.sounds_frame = customtkinter.CTkFrame(self)
         self.sounds_frame.grid(row=0, column=1, padx=(5, 5), pady=(5, 5), sticky="nsew")
-        self.sounds_frame_label = customtkinter.CTkLabel(self.sounds_frame, text="Sounds", font= ("Arial", 16))
+        self.top_frame = customtkinter.CTkFrame(self.sounds_frame)
+        self.top_frame.grid(row=0, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
+        self.sounds_frame_label = customtkinter.CTkLabel(self.top_frame, text="Sounds", font= ("Arial", 16))
         self.sounds_frame_label.grid(row=0, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
+        self.top_frame.grid_columnconfigure(0, weight=1)
         self.sounds_frame.grid_columnconfigure(0, weight=1)
+        self.sounds_load_button = customtkinter.CTkButton(master=self.top_frame, text="Load Sounds", command=self.sounds_treeview_load)
+        self.sounds_load_button.grid(row=0, column=1, padx=(5, 5), pady=(5, 5), sticky="ns")
 
         self.sounds_treeview = tk.ttk.Treeview(self.sounds_frame, columns=("name", "artist", "size", "date_created", "date_last_modified")) 
         self.sounds_treeview.heading("#0", text="ID", anchor="w")
@@ -103,11 +108,10 @@ class SoundPlayer(customtkinter.CTk):
 
         # Bind the Treeview widget to the update_current_playlist method when a sound is selected in the list
         self.sounds_treeview.bind("<<TreeviewSelect>>", self.update_current_playlist) 
-        self.sounds_treeview.bind("<KeyPress-l>", lambda event: self.get_selected_sounds())
 
-    def get_selected_sounds(self):
-        self.player.update([f"./sounds/{self.sounds_treeview.set(item, 'artist')}" for item in self.sounds_treeview.selection()])
-      
+    def sounds_treeview_load(self):
+       self.player.update([f"./sounds/{self.sounds_treeview.set(item, 'artist')}" for item in self.sounds_treeview.selection()])
+
         
     def update_current_playlist(self, event):
         # Update the current playlist with the selected sounds
