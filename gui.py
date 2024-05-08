@@ -53,7 +53,14 @@ class SoundPlayer(customtkinter.CTk):
         
         self.all_sounds_button = customtkinter.CTkButton(master=self.playlist_frame, text="All Sounds", command=lambda: self.update_sounds("All_Sounds"))
         self.all_sounds_button.grid(row=0, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
-       
+
+        available_playlists = os.listdir("sounds")
+        for playlist in available_playlists:
+            if os.path.isdir(f"sounds/{playlist}"):
+                button = customtkinter.CTkButton(master=self.playlist_frame, text=playlist, command=lambda playlist=playlist: self.update_sounds(playlist))
+                button.grid(row=self.playlist_frame.grid_size()[1], column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
+                self.number_of_playlists += 1
+
 
     def sounds_widget(self):
         self.sounds_frame = customtkinter.CTkFrame(self)
@@ -79,11 +86,10 @@ class SoundPlayer(customtkinter.CTk):
 
        
 
-
         self.sounds_treeview.grid(row=1, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
         self.sounds_frame.grid_rowconfigure(1, weight=1)
 
-       
+        
 
         if self.current_playlist:
             self.update_sounds("Current_Playlist")
