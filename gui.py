@@ -7,6 +7,7 @@ import shutil
 from tkinter import filedialog
 from datetime import datetime
 
+
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
 
@@ -24,9 +25,11 @@ class SoundPlayer(customtkinter.CTk):
     
 
         self.number_of_playlists = 0
-        self.playlists = []
+        self.playlists = {}
+        self.current_playlist = []
 
         self.sounds = os.listdir("sounds")
+        self.selected_sounds = []
 
         self.create_widgets()
 
@@ -66,20 +69,35 @@ class SoundPlayer(customtkinter.CTk):
         self.sounds_treeview.column("date_created", width=50, anchor="w")
         self.sounds_treeview.column("date_last_modified", width=50, anchor="w")
 
+       
 
 
         self.sounds_treeview.grid(row=1, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
         self.sounds_frame.grid_rowconfigure(1, weight=1)
 
-        for i, sound in enumerate(self.sounds, 1):
-            sound_stats = os.stat(f"sounds/{sound}")
-            sound_size = sound_stats.st_size
-            sound_date_created = datetime.fromtimestamp(sound_stats.st_ctime).strftime("%Y-%m-%d %H:%M:%S")
-            sound_date_last_modified = datetime.fromtimestamp(sound_stats.st_mtime).strftime("%Y-%m-%d %H:%M:%S")
+       
 
-            self.sounds_treeview.insert("", tk.END, values=(i, sound, "Unknown", f"{sound_size / 1024:.2f} KB", sound_date_created, sound_date_last_modified))
-            self.sounds_treeview.bind("<Double-1>", lambda event: gt.on_play_sound(self))
+        if self.current_playlist:
+            self.update_sounds(self.current_playlist)
+        else:
+            self.update_sounds(self.sounds) 
+
+        self.sounds_treeview.bind("<<TreeviewSelect>>", self.update_playlist) 
+
+      
         
+    def update_playlist(self, event):
+        self.current_playlist = []  
+
+        selected_items = self.sounds_treeview.selection()
+        for item in selected_items:
+            sound_name = self.sounds_treeview.item(item, "values")[0]
+            self.current_playlist.append(sound_name) 
+
+        
+        
+
+ 
 
     def player_controls_widget(self):
         self.player_controls_frame = customtkinter.CTkFrame(self)
@@ -128,14 +146,22 @@ class SoundPlayer(customtkinter.CTk):
 
      
    
-        
-
-    
 
    
 
     def update_sounds(self, playlist):
-        pass
+      
+       #self.sounds = playlist
+        self.sounds_treeview.delete(*self.sounds_treeview.get_children())
+        for i, sound in enumerate(self.sounds, 1):
+            sound_stats = os.stat(f"sounds/{sound}")
+            sound_size = sound_stats.st_size
+            sound_date_created = datetime.fromtimestamp(sound_stats.st_ctime).strftime("%Y-%m-%d %H:%M:%S")
+            sound_date_last_modified = datetime.fromtimestamp(sound_stats.st_mtime).strftime("%Y-%m-%d %H:%M:%S")
+
+            self.sounds_treeview.insert("", tk.END, values=(i, sound, "Unknown", f"{sound_size / 1024:.2f} KB", sound_date_created, sound_date_last_modified), )
+            #self.sounds_treeview.bind("<Double-1>", lambda event: gt.on_play_sound(self))
+       
         
 
 
