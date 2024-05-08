@@ -1,5 +1,9 @@
 import customtkinter
-
+import tkinter as tk
+import tkinter.messagebox
+from tkinter import filedialog
+import shutil
+import os
 
 class Tools:
     def __init__(self):
@@ -26,22 +30,61 @@ class Tools:
     def on_record_sound(self, object):
         pass
 
-    def on_create_playlist(self, soundplayer):
 
-    
+    def on_add_sound_to_playlist(self, playlist_path, soundplaye):
+        sound_files = filedialog.askopenfilenames(
+        title="Add Sounds to Playlist",
+        initialdir="sounds",  # Optionally start in the sounds folder
+        filetypes=[("Audio Files", "*.mp3 *.wav *.ogg")]  # Add more audio filetypes as needed
+        )
+
+        if sound_files: 
+            for file in sound_files:
+                try: 
+                    shutil.copy(file, playlist_path)
+                    # Add the filename to your playlist data structure if needed  
+                except shutil.Error as err:
+                    tkinter.messagebox.showerror("Error", f"Failed to copy {file}: {err}") 
 
 
+    def create_playlist_folder(self, soundplayer):
 
-        dialog = customtkinter.CTkInputDialog(text="Enter the name of the playlist: ", title="Create Playlist")
-        playlist_name = dialog.get_input()
+        playlist_name = tk.simpledialog.askstring("Create Playlist", "Enter a name for your playlist:")
 
-        if playlist_name:
+        if playlist_name:  # Check if a name was provided
             button = customtkinter.CTkButton(master=soundplayer.playlist_frame, 
                                             text=playlist_name,
                                             command= lambda: soundplayer.update_sounds(playlist_name))
             button.grid(row=soundplayer.playlist_frame.grid_size()[1], column=0, padx=5, pady=5)
-            soundplayer.playlists[playlist_name] = soundplayer.current_playlist
-            soundplayer.current_playlist = []
+            
+            playlist_path = os.path.join("sounds", playlist_name)
+
+            try:
+                os.mkdir(playlist_path)
+                return playlist_path
+            except FileExistsError:
+                tkinter.messagebox.showerror("Error", f"Playlist '{playlist_name}' already exists.")
+
+        return None 
+
+    def on_create_playlist(self, soundplayer):
+        playlist_path = self.create_playlist_folder(soundplayer)
+        if playlist_path:
+            soundplayer.playlists[playlist_path] = []
+            soundplayer.update_sounds(playlist_path)
+
+    # def on_create_playlist(self, soundplayer):
+
+    #     dialog = customtkinter.CTkInputDialog(text="Enter the name of the playlist: ", title="Create Playlist")
+    #     playlist_name = dialog.get_input()
+
+    #     if playlist_name:
+    #         button = customtkinter.CTkButton(master=soundplayer.playlist_frame, 
+    #                                         text=playlist_name,
+    #                                         command= lambda: soundplayer.update_sounds(playlist_name))
+    #         button.grid(row=soundplayer.playlist_frame.grid_size()[1], column=0, padx=5, pady=5)
+    #         soundplayer.playlists[playlist_name] = soundplayer.current_playlist
+    #         soundplayer.current_playlist = []
 
       
 
