@@ -146,7 +146,6 @@ class SoundPlayer(customtkinter.CTk):
 
         self.create_playlist_button()
         self.sort_playlist_button()
-        self.edit_sound_button()
         self.record_sound_button()
         self.delete_playlist_button()
         self.add_sound_to_playlist()
