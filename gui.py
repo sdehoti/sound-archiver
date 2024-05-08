@@ -62,7 +62,7 @@ class SoundPlayer(customtkinter.CTk):
             if os.path.isdir(f"sounds/{playlist}"):
                 button = customtkinter.CTkButton(master=self.playlist_frame, text=playlist, command=lambda playlist=playlist: self.update_sounds(playlist))
                 button.grid(row=self.playlist_frame.grid_size()[1], column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
-                self.number_of_playlists += 1
+                self.playlists[playlist] = os.listdir(f"sounds/{playlist}")
 
 
     def sounds_widget(self):
