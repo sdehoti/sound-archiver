@@ -1,5 +1,6 @@
 import os
 from zipfile import ZipFile
+import tkinter as tk
 
 class ShareFiles:
     """
@@ -19,11 +20,12 @@ class ShareFiles:
             None
         """
         # Creating a unique name for the zip file so that it does not overwrite any existing files.
-        export_name = input("Enter the name of the export file: ") + ".zip"
+        export_name = tk.simpledialog.askstring("Export Files", "Enter the name of the export file: ") + ".zip"
         export_path = "./export/" + export_name
         try:
             zip = ZipFile(export_path, "w")
             for file in files:
+                print(file)
                 if file[-4:] == '.wav':
                     zip.write(file, arcname=file.split('/')[-1])
                 elif os.path.isdir(file):
@@ -37,7 +39,6 @@ class ShareFiles:
                 
             zip.close()
             print("ZIP file created successfully.")
-            input("Press Enter to continue...")
         except:
             print("Could not ZIP: " + file)
 

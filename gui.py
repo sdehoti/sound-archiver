@@ -6,6 +6,7 @@ import os
 import shutil
 from tkinter import filedialog
 from datetime import datetime
+from share_file import ShareFiles
 
 from player import Player
 
@@ -14,7 +15,7 @@ customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
 
 gt = Tools()
-
+share_file = ShareFiles()
 
 class SoundPlayer(customtkinter.CTk):
     def __init__(self):
@@ -45,8 +46,8 @@ class SoundPlayer(customtkinter.CTk):
     def create_widgets(self):
         # Create the main widgets for the application
         self.playlists_widget()
-        self.features_widget()
         self.sounds_widget()
+        self.features_widget()
         self.player_controls_widget()
 
 
@@ -150,6 +151,7 @@ class SoundPlayer(customtkinter.CTk):
         self.record_sound_button()
         self.delete_playlist_button()
         self.add_sound_to_playlist()
+        self.export_sounds_button()
 
 
     def create_playlist_button(self):
@@ -164,7 +166,6 @@ class SoundPlayer(customtkinter.CTk):
         self.sort_playlist_button = customtkinter.CTkButton(master=self.features_frame, text="Sort Playlist", command=lambda: gt.on_sort_playlis(self))
         self.sort_playlist_button.grid(row=2, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
 
-
     def record_sound_button(self):
         self.recording_in_progress = False
         self.record_sound_button = customtkinter.CTkButton(master=self.features_frame, text="Record Sound", command=lambda: gt.toggle_record_sound(self))
@@ -174,10 +175,10 @@ class SoundPlayer(customtkinter.CTk):
         self.delete_playlist_button = customtkinter.CTkButton(master=self.features_frame, text="Delete Playlist", command= lambda: gt.on_delete_playlist(self))
         self.delete_playlist_button.grid(row=5, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
 
-     
-   
-
-   
+    def export_sounds_button(self):
+        files = [f"./sounds/{self.sounds_treeview.set(item, 'name')}" for item in self.sounds_treeview.selection()]
+        self.export_sound_button = customtkinter.CTkButton(master=self.features_frame, text="Export Sounds", command=lambda: share_file.zip_files(files))
+        self.export_sound_button.grid(row=6, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
 
     def update_sounds(self, playlist_name):
         
@@ -197,10 +198,6 @@ class SoundPlayer(customtkinter.CTk):
         
         #self.sounds_treeview.bind("<Double-1>", lambda event: gt.on_play_sound(self))
             #self.sounds_treeview.bind("<Double-1>", lambda event: gt.on_play_sound(self))
-       
-        
-
-
 
 
 app = SoundPlayer()

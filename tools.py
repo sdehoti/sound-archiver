@@ -111,9 +111,6 @@ class Tools:
         if playlist_path:
             self.on_add_sound_to_playlist(playlist_path, playlist_name ,soundplayer)
 
-            
-        
-
     def update_sounds(self, soundplayer, playlist):
         pass
 
@@ -128,10 +125,6 @@ class Tools:
                     widget.destroy()
         else:
             tkinter.messagebox.showerror("Error", f"Playlist '{playlist_name}' not found.")
-        
-
-
-        
-
+ 
     def on_delete_sounds(self):
         pass
