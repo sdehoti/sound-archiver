@@ -82,6 +82,7 @@ class SoundPlayer(customtkinter.CTk):
         self.sounds_treeview.heading("size", text="Size", anchor="center")
         self.sounds_treeview.heading("date_created", text="Date Created", anchor="w")
         self.sounds_treeview.heading("date_last_modified", text="Date Last Modified")
+        
 
         self.sounds_treeview.column("#0", width=20, anchor="w")
         self.sounds_treeview.column("name", width=70, anchor="w")
@@ -102,7 +103,10 @@ class SoundPlayer(customtkinter.CTk):
 
         # Bind the Treeview widget to the update_current_playlist method when a sound is selected in the list
         self.sounds_treeview.bind("<<TreeviewSelect>>", self.update_current_playlist) 
+        self.sounds_treeview.bind("<KeyPress-l>", lambda event: self.get_selected_sounds())
 
+    def get_selected_sounds(self):
+        self.player.update([f"./sounds/{self.sounds_treeview.set(item, 'artist')}" for item in self.sounds_treeview.selection()])
       
         
     def update_current_playlist(self, event):
