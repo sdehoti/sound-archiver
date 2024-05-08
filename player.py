@@ -49,24 +49,29 @@ class Player:
             SoundPlayer.play_reverse(SoundPlayer, self.sound[self.pointer])
         elif self.play_options.get() == "random":
             SoundPlayer.play_sound_segment(SoundPlayer, self.sound[self.pointer])
+        elif self.play_options.get() == "layered":
+            SoundPlayer.play_files_simultaneously(SoundPlayer, self.sound)
+            self.play_options.set("default")
+            return
         elif self.play_options.get() == "default":
             SoundPlayer.play_files(SoundPlayer, [self.sound[self.pointer]])
         
+        self.play_options.set("default")
         self.next_sound()
 
     def next_sound(self):
-        try:
+        if self.pointer + 1 < len(self.sound):
             self.pointer += 1
             self.sound_name.configure(text=self.sound[self.pointer])
-        except:
+        else:
             self.pointer = 0
             self.sound_name.configure(text=self.sound[self.pointer])
     
     def prev_sound(self):
-        try:
+        if self.pointer - 1 > -1:
             self.pointer -= 1
             self.sound_name.configure(text=self.sound[self.pointer])
-        except:
+        else:
             self.pointer = len(self.sound) - 1
             self.sound_name.configure(text=self.sound[self.pointer])
      
@@ -83,3 +88,5 @@ class Player:
         self.reverse_button.grid(row=2, column=1, padx=(5, 5), pady=(5, 5), sticky="ew")
         self.random_button = customtkinter.CTkRadioButton(master=self.radiobuttons_frame, text="Random", variable=self.play_options, value="random")
         self.random_button.grid(row=3, column=1, padx=(5, 5), pady=(5, 5), sticky="ew")
+        self.layered_button = customtkinter.CTkRadioButton(master=self.radiobuttons_frame, text="Layered", variable=self.play_options, value="layered")
+        self.layered_button.grid(row=4, column=1, padx=(5, 5), pady=(5, 5), sticky="ew")
