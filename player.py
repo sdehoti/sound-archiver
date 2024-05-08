@@ -36,6 +36,7 @@ class Player:
         self.sound_name.grid(row=2, column=2, sticky="ew")
 
     def render_buttons(self):
+         
          self.prev_button = customtkinter.CTkButton(master=self.frame, text="⏮", command=lambda: self.prev_sound(), font= ("Arial", 20))
          self.prev_button.grid(row=3, column=1, padx=(5, 5), pady=(5, 5), sticky="ew")
          self.play_button = customtkinter.CTkButton(master=self.frame, text="⏵", command=lambda: self.play(), font= ("Arial", 20))
@@ -70,9 +71,15 @@ class Player:
             self.sound_name.configure(text=self.sound[self.pointer])
      
     def radiobuttons(self):
-        self.default_button = customtkinter.CTkRadioButton(master=self.frame, text="None", variable=self.play_options, value="default")
-        self.default_button.grid(row=1, column=0, padx=(5, 5), pady=(5, 5), sticky="ew")
-        self.reverse_button = customtkinter.CTkRadioButton(master=self.frame, text="Reverse", variable=self.play_options, value="reverse")
-        self.reverse_button.grid(row=2, column=0, padx=(5, 5), pady=(5, 5), sticky="ew")
-        self.random_button = customtkinter.CTkRadioButton(master=self.frame, text="Random", variable=self.play_options, value="random")
-        self.random_button.grid(row=3, column=0, padx=(5, 5), pady=(5, 5), sticky="ew")
+        self.radiobuttons_frame = customtkinter.CTkFrame(master=self.frame)
+        self.radiobuttons_frame.grid(row=1, column=0,padx=(20, 20), pady=(20, 20), )
+        self.radiobuttons_frame.grid_columnconfigure(0, weight=1)
+        self.radiobuttons_frame.grid_columnconfigure(2, weight=1)
+        self.radiobuttons_label = customtkinter.CTkLabel(self.radiobuttons_frame, text="Play Options")
+        self.radiobuttons_label.grid(row=0, column=1, padx=(5, 5), pady=(5, 5), sticky="ew")
+        self.default_button = customtkinter.CTkRadioButton(master=self.radiobuttons_frame, text="None", variable=self.play_options, value="default")
+        self.default_button.grid(row=1, column=1, padx=(5, 5), pady=(5, 5), sticky="ew")
+        self.reverse_button = customtkinter.CTkRadioButton(master=self.radiobuttons_frame, text="Reverse", variable=self.play_options, value="reverse")
+        self.reverse_button.grid(row=2, column=1, padx=(5, 5), pady=(5, 5), sticky="ew")
+        self.random_button = customtkinter.CTkRadioButton(master=self.radiobuttons_frame, text="Random", variable=self.play_options, value="random")
+        self.random_button.grid(row=3, column=1, padx=(5, 5), pady=(5, 5), sticky="ew")
