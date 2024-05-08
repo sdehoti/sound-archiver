@@ -3,7 +3,7 @@ import wave
 import audioop
 import random
 import numpy as np
-import matplotlib.pyplot as plt
+
 from io import BytesIO
 
 class SoundPlayer:
