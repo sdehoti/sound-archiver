@@ -31,7 +31,7 @@ class Tools:
         pass
 
 
-    def on_add_sound_to_playlist(self, playlist_path, soundplaye):
+    def on_add_sound_to_playlist(self, playlist_path,playlist_name, soundplayer):
         sound_files = filedialog.askopenfilenames(
         title="Add Sounds to Playlist",
         initialdir="sounds",  # Optionally start in the sounds folder
@@ -42,6 +42,7 @@ class Tools:
             for file in sound_files:
                 try: 
                     shutil.copy(file, playlist_path)
+                    soundplayer.playlists[playlist_name].append(file)
                     # Add the filename to your playlist data structure if needed  
                 except shutil.Error as err:
                     tkinter.messagebox.showerror("Error", f"Failed to copy {file}: {err}") 
@@ -50,7 +51,8 @@ class Tools:
     def create_playlist_folder(self, soundplayer):
 
         playlist_name = tk.simpledialog.askstring("Create Playlist", "Enter a name for your playlist:")
-        
+        #need to keep track of the playlists created. 
+        soundplayer.playlists[playlist_name] = []
 
         if playlist_name:  # Check if a name was provided
             button = customtkinter.CTkButton(master=soundplayer.playlist_frame, 
@@ -62,22 +64,22 @@ class Tools:
 
             try:
                 os.mkdir(playlist_path)
-                return playlist_path
+                return playlist_path, playlist_name
             except FileExistsError:
                 tkinter.messagebox.showerror("Error", f"Playlist '{playlist_name}' already exists.")
+                button.destroy()
 
         return None 
 
     def on_create_playlist(self, soundplayer):
-        playlist_path = self.create_playlist_folder(soundplayer)
-      
+        playlist_path, playlist_name = self.create_playlist_folder(soundplayer)
         if playlist_path:
-            self.on_add_sound_to_playlist(playlist_path, soundplayer)
+            self.on_add_sound_to_playlist(playlist_path, playlist_name ,soundplayer)
+
             
         
 
     def update_sounds(self, soundplayer, playlist):
-
         pass
 
     def on_delete_playlist(self, soundplayer):
@@ -89,6 +91,8 @@ class Tools:
             for widget in soundplayer.playlist_frame.winfo_children():
                 if widget.cget("text") == playlist_name:
                     widget.destroy()
+        else:
+            tkinter.messagebox.showerror("Error", f"Playlist '{playlist_name}' not found.")
         
 
 
