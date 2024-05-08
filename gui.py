@@ -33,6 +33,9 @@ class SoundPlayer(customtkinter.CTk):
 
         
         self.playlists["All_Sounds"] = os.listdir("sounds")
+
+    
+
      
         
 
@@ -173,8 +176,9 @@ class SoundPlayer(customtkinter.CTk):
     def update_sounds(self, playlist_name):
         
         # Update the sounds list based on the selected playlist
-        if playlist_name in self.playlists:
+        if playlist_name in self.playlists.keys():
             self.sounds = self.playlists[playlist_name]
+            
 
         self.sounds_treeview.delete(*self.sounds_treeview.get_children())
         for i, sound in enumerate(self.sounds, 1):
@@ -185,7 +189,7 @@ class SoundPlayer(customtkinter.CTk):
 
             self.sounds_treeview.insert("", tk.END, values=(i, sound, "Unknown", f"{sound_size / 1024:.2f} KB", sound_date_created, sound_date_last_modified))
         
-        self.sounds_treeview.bind("<Double-1>", lambda event: gt.on_play_sound(self))
+        #self.sounds_treeview.bind("<Double-1>", lambda event: gt.on_play_sound(self))
             #self.sounds_treeview.bind("<Double-1>", lambda event: gt.on_play_sound(self))
        
         
