@@ -50,6 +50,7 @@ class Tools:
     def create_playlist_folder(self, soundplayer):
 
         playlist_name = tk.simpledialog.askstring("Create Playlist", "Enter a name for your playlist:")
+        
 
         if playlist_name:  # Check if a name was provided
             button = customtkinter.CTkButton(master=soundplayer.playlist_frame, 
@@ -69,6 +70,7 @@ class Tools:
 
     def on_create_playlist(self, soundplayer):
         playlist_path = self.create_playlist_folder(soundplayer)
+      
         if playlist_path:
             self.on_add_sound_to_playlist(playlist_path, soundplayer)
             

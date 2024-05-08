@@ -91,8 +91,7 @@ class SoundPlayer(customtkinter.CTk):
 
         self.sounds_treeview.grid(row=1, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
         self.sounds_frame.grid_rowconfigure(1, weight=1)
-        
-
+       
         if self.current_playlist:
             self.update_sounds("Current_Playlist")
         else:
@@ -120,7 +119,7 @@ class SoundPlayer(customtkinter.CTk):
         # self.sounds_treeview.insert("", tkinter.END, values=("Song 3", "Artist 3", "2.1 MB"))
 
     def player_controls_widget(self):
-        player = Player(self)
+        self.player = Player(self)
 
         #Instead of using buttons for controls, use icons for play, stop, pause, and resume
        
