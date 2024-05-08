@@ -166,7 +166,8 @@ class SoundPlayer(customtkinter.CTk):
 
 
     def record_sound_button(self):
-        self.record_sound_button = customtkinter.CTkButton(master=self.features_frame, text="Record Sound", command=lambda: gt.on_record_sound(self))
+        self.recording_in_progress = False
+        self.record_sound_button = customtkinter.CTkButton(master=self.features_frame, text="Record Sound", command=lambda: gt.toggle_record_sound(self))
         self.record_sound_button.grid(row=4, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
 
     def delete_playlist_button(self):
