@@ -4,22 +4,15 @@ import tkinter.messagebox
 from tkinter import filedialog
 import shutil
 import os
+import wavio 
+import sounddevice as sd
+
 
 class Tools:
     def __init__(self):
         pass
     
-    def on_play_sound(self, object):
-        pass
-
-    def on_stop_sound(self, object):
-        pass
-
-    def on_pause_sound(self, object):
-        pass
-
-    def on_resume_sound(self, object):
-        pass
+    
 
     def on_sort_playlist(self, object):
         pass
@@ -29,6 +22,47 @@ class Tools:
 
     def on_record_sound(self, object):
         pass
+
+
+    def toggle_record_sound(self,soundplayer):
+        print("working")
+        if not soundplayer.recording_in_progress:
+            self.start_recording(soundplayer)
+            soundplayer.recording_in_progress = True  # Update flag
+        else:
+            self.stop_recording(soundplayer)
+            soundplayer.recording_in_progress = False  # Update flag
+
+    def start_recording(self,soundplayer):
+        # Define the recording parameters
+        self.duration = 1000  # Recording duration in seconds
+        self.sample_rate = 44100  # Sample rate (samples per second)
+        self.channels = 1  # Number of audio channels (1 for mono, 2 for stereo)
+
+        # Start recording
+        self.recording = sd.rec(int(self.duration * self.sample_rate), samplerate=self.sample_rate,
+                                channels=self.channels, dtype='float64')
+        soundplayer.record_sound_button.configure(text="Stop Recording")
+
+    def stop_recording(self,soundplayer):
+        # Stop recording
+        sd.wait()
+
+        # Save the recorded audio to a WAV file in the "sounds" folder
+        filename = tk.simpledialog.askstring("New Sound", "Enter a name for your new recording:") + ".wav"
+        filepath = os.path.join("sounds", filename)
+        wavio.write(filepath, self.recording, self.sample_rate, sampwidth=3)
+
+        # Display a message box confirming the recording is saved
+        tkinter.messagebox.showinfo("Recording Saved",
+                                    f"The recording has been saved as {filename} in the 'sounds' folder.")
+
+        # Reset the button text
+        soundplayer.record_sound_button.configure(text="Record Sound")
+        #soundplayer.update_sounds("All_Sounds")
+
+
+
 
 
     def on_add_sound_to_playlist(self, playlist_path,playlist_name, soundplayer):
