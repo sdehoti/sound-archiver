@@ -156,9 +156,6 @@ class SoundPlayer(customtkinter.CTk):
         self.sort_playlist_button = customtkinter.CTkButton(master=self.features_frame, text="Sort Playlist", command=lambda: gt.on_sort_playlis(self))
         self.sort_playlist_button.grid(row=2, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
 
-    def edit_sound_button(self):
-        self.edit_sound_button = customtkinter.CTkButton(master=self.features_frame, text="Edit Sound File", command=lambda: gt.on_edit_sound(self))
-        self.edit_sound_button.grid(row=3, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
 
     def record_sound_button(self):
         self.record_sound_button = customtkinter.CTkButton(master=self.features_frame, text="Record Sound", command=lambda: gt.on_record_sound(self))
