@@ -5,7 +5,7 @@ import tkinter
 
 class Player:
     def __init__(self, master):
-        self.sound = ['./sounds/coffee.wav','./sounds/toaster-2.wav']
+        self.sound = ['No sound selected']
         self.pointer = 0
         self.frame = customtkinter.CTkFrame(master)
         self.frame.grid(row=1, column=1, padx=(5, 5), pady=(5, 5), sticky="nsew")
@@ -25,6 +25,7 @@ class Player:
         # a string list of sound file paths
         self.sound = sound
         self.pointer = 0
+        self.sound_name.configure(text=self.sound[self.pointer].split('/')[-1])
 
     def render_wave_icon(self):
         self.wave_icon = customtkinter.CTkImage(light_image=Image.open('default-cover-art.png'), dark_image=Image.open('default-cover-art.png'), size=(180,180))
@@ -32,7 +33,7 @@ class Player:
         self.label.grid(row=1, column=2, padx=(5, 5), pady=(5, 5), sticky="ew")
 
     def render_sound_name(self):
-        self.sound_name = customtkinter.CTkLabel(master=self.frame, text=self.sound[self.pointer])
+        self.sound_name = customtkinter.CTkLabel(master=self.frame, text=self.sound[self.pointer].split('/')[-1])
         self.sound_name.grid(row=2, column=2, sticky="ew")
 
     def render_buttons(self):
@@ -62,18 +63,18 @@ class Player:
     def next_sound(self):
         if self.pointer + 1 < len(self.sound):
             self.pointer += 1
-            self.sound_name.configure(text=self.sound[self.pointer])
+            self.sound_name.configure(text=self.sound[self.pointer].split('/')[-1])
         else:
             self.pointer = 0
-            self.sound_name.configure(text=self.sound[self.pointer])
+            self.sound_name.configure(text=self.sound[self.pointer].split('/')[-1])
     
     def prev_sound(self):
         if self.pointer - 1 > -1:
             self.pointer -= 1
-            self.sound_name.configure(text=self.sound[self.pointer])
+            self.sound_name.configure(text=self.sound[self.pointer].split('/')[-1])
         else:
             self.pointer = len(self.sound) - 1
-            self.sound_name.configure(text=self.sound[self.pointer])
+            self.sound_name.configure(text=self.sound[self.pointer].split('/')[-1])
      
     def radiobuttons(self):
         self.radiobuttons_frame = customtkinter.CTkFrame(master=self.frame)
