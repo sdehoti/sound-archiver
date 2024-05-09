@@ -20,8 +20,5 @@ python3 gui.py
 
 
 
-## Testing
-For testing, we have written unit tests for methods of SoundPlayer from sound_player.py in the testing.py file. To implement these unit tests we have used the unittest library. We have decided to manually test our archive's grouping, sorting, and export functionality, as it requires us to see if these features are executed correctly.
 
-## Challenges
-One of the biggest challenges we have overcome was implementing the play_files_simultaneously method from SoundPlayer. After reading the official documentation of the simpleaudio library, we have used the conversion function to convert the individual audio files into Wave objects played one by one in a very short amount of time so that they layer on top of each other.
+
