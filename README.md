@@ -11,7 +11,8 @@ Our program uses a graphical user interface built using the tkinter and customtk
 
 ``
 pip install -r requirements.txt
-
+``
+``
 python3 gui.py
 ``
 <img width="1312" alt="IMG_4622" src="https://github.com/WhitmanCS370/GlobalUnited/assets/128567935/26e309ce-73c6-4dbc-bd6b-6d89275c15e3">
