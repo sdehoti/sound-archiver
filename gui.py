@@ -22,7 +22,7 @@ class SoundPlayer(customtkinter.CTk):
 
         self.title("Sound Player")
         self.geometry("1200x600")
-
+        self.sortOrder = False
         self.grid_columnconfigure((1), weight=1)
         self.grid_columnconfigure((0,2), weight=0)
 
@@ -67,14 +67,14 @@ class SoundPlayer(customtkinter.CTk):
         self.sounds_load_button = customtkinter.CTkButton(master=self.top_frame, text="Load Sounds", command=self.sounds_treeview_load)
         self.sounds_load_button.grid(row=0, column=1, padx=(5, 5), pady=(5, 5), sticky="ns")
 
-        self.sounds_treeview = tk.ttk.Treeview(self.sounds_frame, columns=('ID',"name", "artist", "size", "date_created", "date_last_modified"), show='headings') 
+        self.sounds_treeview = tk.ttk.Treeview(self.sounds_frame, columns=('ID',"name", "artist", "size", "date_created", "date_last_modified"), show='headings', selectmode = "browse") 
 
-        self.sounds_treeview.heading("ID", text="ID", anchor="center")
-        self.sounds_treeview.heading("name", text="Name", anchor="center")
-        self.sounds_treeview.heading("artist", text="Artist", anchor="center")
-        self.sounds_treeview.heading("size", text="Size", anchor="center")
-        self.sounds_treeview.heading("date_created", text="Date Created", anchor="w")
-        self.sounds_treeview.heading("date_last_modified", text="Date Last Modified")
+        self.sounds_treeview.heading("ID", text="ID", anchor="c", command=lambda: self.sort_treeview("ID"))
+        self.sounds_treeview.heading("name", text="Name", anchor="c", command=lambda: self.sort_treeview("name"))
+        self.sounds_treeview.heading("artist", text="Artist", anchor="c",  command=lambda: self.sort_treeview("artist"))
+        self.sounds_treeview.heading("size", text="Size", anchor="c",  command=lambda: self.sort_treeview("size"))
+        self.sounds_treeview.heading("date_created", text="Date Created", anchor="c",  command=lambda: self.sort_treeview("date_created"))
+        self.sounds_treeview.heading("date_last_modified", text="Date Last Modified", anchor="c", command=lambda: self.sort_treeview("date_last_modified"))
 
         self.sounds_treeview.column("ID", width=30, anchor="w")
         self.sounds_treeview.column("name", width=70, anchor="w")
@@ -98,6 +98,20 @@ class SoundPlayer(customtkinter.CTk):
        files = [f"./sounds/{self.sounds_treeview.set(item, 'name')}" for item in self.sounds_treeview.selection()]
        self.player.update(files)
        return files
+    
+    def sort_treeview(self, column):
+        sounds = [(self.sounds_treeview.set(item, column), item) for item in self.sounds_treeview.get_children("")]
+        if column == "ID":
+            sounds.sort(key=lambda x: int(x[0]), reverse=self.sortOrder)
+        elif column == "size":
+            sounds.sort(key=lambda x: float(x[0].split()[0]), reverse=self.sortOrder)
+        else:
+            sounds.sort(reverse=self.sortOrder)
+        for i in range(len(sounds)):
+            self.sounds_treeview.move(sounds[i][1], "", i)
+        self.sortOrder = not self.sortOrder
+
+        
     
     def update_current_playlist(self, event):
         # Update the current playlist with the selected sounds
