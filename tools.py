@@ -12,14 +12,6 @@ class Tools:
     def __init__(self):
         pass
     
-    def on_sort_playlist(self, object):
-        pass
-
-    def on_edit_sound(self, object):
-        pass
-
-    def on_record_sound(self, object):
-        pass
 
     def toggle_record_sound(self,soundplayer):
         print("working")
@@ -58,7 +50,8 @@ class Tools:
         soundplayer.record_sound_button.configure(text="Record Sound")
         #soundplayer.update_sounds("All_Sounds")
 
-    def on_add_sound_to_playlist(self, playlist_path,playlist_name, soundplayer):
+    def on_add_sound_to_playlist(self, playlist_path, playlist_name, soundplayer):
+        
         sound_files = filedialog.askopenfilenames(
         title="Add Sounds to Playlist",
         initialdir="sounds",  # Optionally start in the sounds folder
@@ -84,7 +77,7 @@ class Tools:
             button = customtkinter.CTkButton(master=soundplayer.playlist_frame, 
                                             text=playlist_name,
                                             command= lambda: soundplayer.update_sounds(playlist_name))
-            button.grid(row=soundplayer.playlist_frame.grid_size()[1], column=0, padx=5, pady=5)
+            button.grid(row=soundplayer.playlist_frame.grid_size()[1], column=0, padx=(5,5), pady=(5,5), sticky="ew")
             
             playlist_path = os.path.join("sounds", playlist_name)
 

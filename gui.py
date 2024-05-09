@@ -9,6 +9,7 @@ from datetime import datetime
 from share_file import ShareFiles
 import glob
 from player import Player
+import threading
 
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
@@ -116,7 +117,6 @@ class SoundPlayer(customtkinter.CTk):
     def update_current_playlist(self, event):
         # Update the current playlist with the selected sounds
         self.current_playlist = []  
-
         selected_items = self.sounds_treeview.selection()
         for item in selected_items:
             sound_name = self.sounds_treeview.item(item, "values")[0]
@@ -135,23 +135,13 @@ class SoundPlayer(customtkinter.CTk):
         self.features_frame.grid_columnconfigure(0, weight=1)
 
         self.create_playlist_button()
-        self.sort_playlist_button()
         self.record_sound_button()
         self.delete_playlist_button()
-        self.add_sound_to_playlist()
         self.export_sounds_button()
 
     def create_playlist_button(self):
         self.create_playlist_button = customtkinter.CTkButton(master=self.features_frame, text="Create Playlist", command=lambda: gt.on_create_playlist(self))
         self.create_playlist_button.grid(row=1, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
-
-    def add_sound_to_playlist(self):
-        self.add_sound_to_playlist = customtkinter.CTkButton(master=self.features_frame, text="Add Sound to Playlist", command=lambda: gt.on_add_sound_to_playlist(self))
-        self.add_sound_to_playlist.grid(row=2, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")   
-        
-    def sort_playlist_button(self):
-        self.sort_playlist_button = customtkinter.CTkButton(master=self.features_frame, text="Sort Playlist", command=lambda: gt.on_sort_playlis(self))
-        self.sort_playlist_button.grid(row=2, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
 
     def record_sound_button(self):
         self.recording_in_progress = False
