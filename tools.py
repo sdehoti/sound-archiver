@@ -32,7 +32,7 @@ class Tools:
 
     def start_recording(self,soundplayer):
         # Define the recording parameters
-        self.duration = 1000  # Recording duration in seconds
+        self.duration = 10  # Recording duration in seconds
         self.sample_rate = 44100  # Sample rate (samples per second)
         self.channels = 1  # Number of audio channels (1 for mono, 2 for stereo)
 

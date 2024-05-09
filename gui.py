@@ -7,6 +7,7 @@ import shutil
 from tkinter import filedialog
 from datetime import datetime
 from share_file import ShareFiles
+import glob
 
 from player import Player
 
@@ -29,8 +30,21 @@ class SoundPlayer(customtkinter.CTk):
 
         self.number_of_playlists = 0
         self.playlists = {}
+<<<<<<< HEAD
         self.current_playlist = []       
         self.playlists["All_Sounds"] = os.listdir("sounds")
+=======
+        self.current_playlist = []
+
+        
+        self.playlists["All_Sounds"] = [file for file in os.listdir("sounds") if file.endswith(".wav")]
+
+    
+
+     
+        
+
+>>>>>>> d93e56e42036acec8f87fa5584eff3230ea3fedb
         self.create_widgets()
 
     def create_widgets(self):
@@ -96,8 +110,16 @@ class SoundPlayer(customtkinter.CTk):
         self.sounds_treeview.bind("<<TreeviewSelect>>", self.update_current_playlist) 
 
     def sounds_treeview_load(self):
+<<<<<<< HEAD
        self.player.update([f"./sounds/{self.sounds_treeview.set(item, 'name')}" for item in self.sounds_treeview.selection()])
 
+=======
+       files = [f"./sounds/{self.sounds_treeview.set(item, 'name')}" for item in self.sounds_treeview.selection()]
+       self.player.update(files)
+       return files
+    
+        
+>>>>>>> d93e56e42036acec8f87fa5584eff3230ea3fedb
     def update_current_playlist(self, event):
         # Update the current playlist with the selected sounds
         self.current_playlist = []  
@@ -159,8 +181,7 @@ class SoundPlayer(customtkinter.CTk):
         self.delete_playlist_button.grid(row=5, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
 
     def export_sounds_button(self):
-        files = [f"./sounds/{self.sounds_treeview.set(item, 'name')}" for item in self.sounds_treeview.selection()]
-        self.export_sound_button = customtkinter.CTkButton(master=self.features_frame, text="Export Sounds", command=lambda: share_file.zip_files(files))
+        self.export_sound_button = customtkinter.CTkButton(master=self.features_frame, text="Export Sounds",command=lambda: share_file.zip_files(self.sounds_treeview_load()))
         self.export_sound_button.grid(row=6, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
 
     def update_sounds(self, playlist_name):
