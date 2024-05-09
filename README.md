@@ -4,7 +4,7 @@ CS370 Final Project for team Global United
 - Fabian: Contributed to sound_player, testing and share_file module.
 - Shahrom: Contributed to testing files, refactoring and adding features the sounds files and folders manipulations
 - Terence: Contributed to gui.py and tools.py.
-- Zurain: Contributed to adding functionalities regarding organizing folders and making the UI for the archive
+- Zurain: Contributed to adding functionalities regarding organizing folders and recording sounds for gui.py
 
 ## How To Use
 Our program uses a graphical user interface built using the tkinter and customtkinter libraries. To run the application all the source files need to be in the same directory as the sounds folder, which will work as the main audio library. Once everything is in the same directory run the following commands: 
