@@ -3,7 +3,7 @@ CS370 Final Project for team Global United
 ## Team Members
 - Fabian: Contributed to sound_player, testing and share_file module.
 - Shahrom: Contributed to testing files, refactoring and adding features the sounds files and folders manipulations
-- Terence: Contributed to sound_player, testing and sorting modules.
+- Terence: Contributed to gui.py and tools.py.
 - Zurain: Contributed to adding functionalities regarding organizing folders and making the UI for the archive
 
 ## How To Use
