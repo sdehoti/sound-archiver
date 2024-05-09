@@ -67,7 +67,7 @@ class SoundPlayer(customtkinter.CTk):
         self.sounds_load_button = customtkinter.CTkButton(master=self.top_frame, text="Load Sounds", command=self.sounds_treeview_load)
         self.sounds_load_button.grid(row=0, column=1, padx=(5, 5), pady=(5, 5), sticky="ns")
 
-        self.sounds_treeview = tk.ttk.Treeview(self.sounds_frame, columns=('ID',"name", "artist", "size", "date_created", "date_last_modified"), show='headings', selectmode = "browse") 
+        self.sounds_treeview = tk.ttk.Treeview(self.sounds_frame, columns=('ID',"name", "artist", "size", "date_created", "date_last_modified"), show='headings') 
 
         self.sounds_treeview.heading("ID", text="ID", anchor="c", command=lambda: self.sort_treeview("ID"))
         self.sounds_treeview.heading("name", text="Name", anchor="c", command=lambda: self.sort_treeview("name"))
