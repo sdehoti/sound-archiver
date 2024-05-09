@@ -8,9 +8,7 @@ from tkinter import filedialog
 from datetime import datetime
 from share_file import ShareFiles
 import glob
-
 from player import Player
-
 
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
@@ -101,7 +99,6 @@ class SoundPlayer(customtkinter.CTk):
        self.player.update(files)
        return files
     
-        
     def update_current_playlist(self, event):
         # Update the current playlist with the selected sounds
         self.current_playlist = []  
@@ -112,17 +109,8 @@ class SoundPlayer(customtkinter.CTk):
             self.current_playlist.append(sound_name)
         self.playlists["Current_Playlist"] = self.current_playlist 
 
-        
-   
-        # self.sounds_treeview.insert("", tkinter.END, values=("Song 1", "Artist 1", "3.5 MB"))
-        # self.sounds_treeview.insert("", tkinter.END, values=("Song 2", "Artist 2", "4.2 MB"))
-        # self.sounds_treeview.insert("", tkinter.END, values=("Song 3", "Artist 3", "2.1 MB"))
-
     def player_controls_widget(self):
         self.player = Player(self)
-
-        #Instead of using buttons for controls, use icons for play, stop, pause, and resume
-       
 
     def features_widget(self):
         # Create the features frame and its widgets
@@ -132,14 +120,12 @@ class SoundPlayer(customtkinter.CTk):
         self.features_frame_label.grid(row=0, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
         self.features_frame.grid_columnconfigure(0, weight=1)
 
-
         self.create_playlist_button()
         self.sort_playlist_button()
         self.record_sound_button()
         self.delete_playlist_button()
         self.add_sound_to_playlist()
         self.export_sounds_button()
-
 
     def create_playlist_button(self):
         self.create_playlist_button = customtkinter.CTkButton(master=self.features_frame, text="Create Playlist", command=lambda: gt.on_create_playlist(self))
@@ -167,24 +153,16 @@ class SoundPlayer(customtkinter.CTk):
         self.export_sound_button.grid(row=6, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
 
     def update_sounds(self, playlist_name):
-        
         # Update the sounds list based on the selected playlist
         if playlist_name in self.playlists.keys():
-            self.sounds = self.playlists[playlist_name]
-            
-
+            self.sounds = self.playlists[playlist_name]            
         self.sounds_treeview.delete(*self.sounds_treeview.get_children())
         for i, sound in enumerate(self.sounds, 1):
             sound_stats = os.stat(f"sounds/{sound}")
             sound_size = sound_stats.st_size
             sound_date_created = datetime.fromtimestamp(sound_stats.st_ctime).strftime("%Y-%m-%d %H:%M:%S")
             sound_date_last_modified = datetime.fromtimestamp(sound_stats.st_mtime).strftime("%Y-%m-%d %H:%M:%S")
-
             self.sounds_treeview.insert("", tk.END, values=(i, sound, "Unknown", f"{sound_size / 1024:.2f} KB", sound_date_created, sound_date_last_modified))
-        
-        #self.sounds_treeview.bind("<Double-1>", lambda event: gt.on_play_sound(self))
-            #self.sounds_treeview.bind("<Double-1>", lambda event: gt.on_play_sound(self))
-
 
 app = SoundPlayer()
 app.mainloop()
