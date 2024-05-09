@@ -12,8 +12,6 @@ class Tools:
     def __init__(self):
         pass
     
-    
-
     def on_sort_playlist(self, object):
         pass
 
@@ -22,7 +20,6 @@ class Tools:
 
     def on_record_sound(self, object):
         pass
-
 
     def toggle_record_sound(self,soundplayer):
         print("working")
@@ -61,10 +58,6 @@ class Tools:
         soundplayer.record_sound_button.configure(text="Record Sound")
         #soundplayer.update_sounds("All_Sounds")
 
-
-
-
-
     def on_add_sound_to_playlist(self, playlist_path,playlist_name, soundplayer):
         sound_files = filedialog.askopenfilenames(
         title="Add Sounds to Playlist",
@@ -81,13 +74,11 @@ class Tools:
                 except shutil.Error as err:
                     tkinter.messagebox.showerror("Error", f"Failed to copy {file}: {err}") 
 
-
     def create_playlist_folder(self, soundplayer):
 
         playlist_name = tk.simpledialog.askstring("Create Playlist", "Enter a name for your playlist:")
         #need to keep track of the playlists created. 
         
-
         if playlist_name:  # Check if a name was provided
             soundplayer.playlists[playlist_name] = []
             button = customtkinter.CTkButton(master=soundplayer.playlist_frame, 

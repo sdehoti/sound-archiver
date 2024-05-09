@@ -26,22 +26,12 @@ class SoundPlayer(customtkinter.CTk):
 
         self.grid_columnconfigure((1), weight=1)
         self.grid_columnconfigure((0,2), weight=0)
-    
 
         self.number_of_playlists = 0
         self.playlists = {}
-        self.current_playlist = []
-
-        
+        self.current_playlist = []       
         self.playlists["All_Sounds"] = os.listdir("sounds")
-
-    
-
-     
-        
-
         self.create_widgets()
-
 
     def create_widgets(self):
         # Create the main widgets for the application
@@ -49,8 +39,6 @@ class SoundPlayer(customtkinter.CTk):
         self.sounds_widget()
         self.features_widget()
         self.player_controls_widget()
-
-
 
     def playlists_widget(self):
         # Create the playlists frame and the default "All Sounds" button
@@ -67,7 +55,6 @@ class SoundPlayer(customtkinter.CTk):
                 button = customtkinter.CTkButton(master=self.playlist_frame, text=playlist, command=lambda playlist=playlist: self.update_sounds(playlist))
                 button.grid(row=self.playlist_frame.grid_size()[1], column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
                 self.playlists[playlist] = os.listdir(f"sounds/{playlist}")
-
 
     def sounds_widget(self):
         self.sounds_frame = customtkinter.CTkFrame(self)
@@ -89,7 +76,6 @@ class SoundPlayer(customtkinter.CTk):
         self.sounds_treeview.heading("size", text="Size", anchor="center")
         self.sounds_treeview.heading("date_created", text="Date Created", anchor="w")
         self.sounds_treeview.heading("date_last_modified", text="Date Last Modified")
-        
 
         self.sounds_treeview.column("ID", width=30, anchor="w")
         self.sounds_treeview.column("name", width=70, anchor="w")
@@ -97,8 +83,6 @@ class SoundPlayer(customtkinter.CTk):
         self.sounds_treeview.column("size", width=50,   anchor="w")
         self.sounds_treeview.column("date_created", width=50, anchor="w")
         self.sounds_treeview.column("date_last_modified", width=50, anchor="w")
-
-       
 
         self.sounds_treeview.grid(row=1, column=0, padx=(5, 5), pady=(5, 5), sticky="nsew")
         self.sounds_frame.grid_rowconfigure(1, weight=1)
@@ -114,7 +98,6 @@ class SoundPlayer(customtkinter.CTk):
     def sounds_treeview_load(self):
        self.player.update([f"./sounds/{self.sounds_treeview.set(item, 'name')}" for item in self.sounds_treeview.selection()])
 
-        
     def update_current_playlist(self, event):
         # Update the current playlist with the selected sounds
         self.current_playlist = []  

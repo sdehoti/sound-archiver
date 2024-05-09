@@ -6,7 +6,6 @@ class FileManager:
     """
     A class to manage file and folder operations within a sound archive project.
     """
-
     def list_files(self, folder_name):
         """
         Lists all files in the specified folder.

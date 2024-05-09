@@ -10,42 +10,6 @@ class SoundPlayer:
     """
     SoundPlayer class provides methods to play audio files, reverse audio, and play random segments of audio files.
     """
-    def generate_sound_image(self, file_path):
-            """
-            Generates an image of the sound wave from a Wave object and saves it as a PNG file.
-
-            Parameters:
-                wave_obj (Wave): Wave object of the audio file.
-                output_path (str): File path to save the PNG image.
-
-            Returns:
-                None
-
-            Raises:
-                None
-            """
-            wave_obj = wave.open(file_path, 'rb')
-            # Get the audio data from the Wave object
-            audio_data = wave_obj.readframes(-1)
-
-            # Print the audio data for debugging
-            print(audio_data)
-
-            # Convert the audio data to a numpy array
-            audio_array = np.frombuffer(audio_data, dtype=np.int16)
-
-            # Create the time axis for the sound wave
-            time = np.arange(0, len(audio_array)) / wave_obj._framerate
-
-            # Plot the sound wave
-            plt.plot(time, audio_array)
-            plt.grid(True)
-
-            # Save the plot as a PNG image
-
-            plt.savefig('./data/sound_wave.png')
-            plt.close()
-
     def play_files(self, file_paths):
         """
         Plays audio files sequentially.
