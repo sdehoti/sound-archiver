@@ -40,7 +40,7 @@ class Player:
          
          self.prev_button = customtkinter.CTkButton(master=self.frame, text="⏮", command=lambda: self.prev_sound(), font= ("Arial", 20))
          self.prev_button.grid(row=3, column=1, padx=(5, 5), pady=(5, 5), sticky="ew")
-         self.play_button = customtkinter.CTkButton(master=self.frame, text="⏵", command=lambda: self.play(), font= ("Arial", 20))
+         self.play_button = customtkinter.CTkButton(master=self.frame, text="⏵", command=lambda:self.play(), font= ("Arial", 20))
          self.play_button.grid(row=3, column=2, padx=(5, 5), pady=(5, 5), sticky="ew")
          self.next_button = customtkinter.CTkButton(master=self.frame, text="⏭", command=lambda: self.next_sound(), font= ("Arial", 20))
          self.next_button.grid(row=3, column=3, padx=(5, 5), pady=(5, 5), sticky="ew")
@@ -54,7 +54,7 @@ class Player:
             SoundPlayer.play_files_simultaneously(SoundPlayer, self.sound)
             self.play_options.set("default")
             return
-        elif self.play_options.get() == "default":
+        else:
             SoundPlayer.play_files(SoundPlayer, [self.sound[self.pointer]])
         
         self.play_options.set("default")
