@@ -110,5 +110,6 @@ class Tools:
         else:
             tkinter.messagebox.showerror("Error", f"Playlist '{playlist_name}' not found.")
  
-    def on_delete_sounds(self):
-        pass
+
+
+

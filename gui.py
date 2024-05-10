@@ -282,8 +282,8 @@ class SoundPlayer(customtkinter.CTk):
 
 
 # Create and run the SoundPlayer application
-app = SoundPlayer()
-app.mainloop()
 
 
-    
+if __name__ == "__main__":
+    app = SoundPlayer()
+    app.mainloop()
