@@ -30,7 +30,6 @@ class SoundPlayer:
                 print(wave_obj)
                 play_obj = wave_obj.play()
                 play_obj.wait_done()
-                input("Press Enter to continue...")
             except:
                 print('Invalid filepath')
 
@@ -100,7 +99,6 @@ class SoundPlayer:
             print(wave_obj)
             play_obj = wave_obj.play()
             play_obj.wait_done()
-            input("Press Enter to continue...")
 
         except:
              print('Invalid filepath')
@@ -138,7 +136,6 @@ class SoundPlayer:
             print(wave_obj)
             play_obj = wave_obj.play()
             play_obj.wait_done()
-            input("Press Enter to continue...")
         except:
             print('Invalid filepath')
 
