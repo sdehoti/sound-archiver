@@ -7,14 +7,22 @@ import os
 import wavio 
 import sounddevice as sd
 
-
 class Tools:
+    """
+    Tools Class
+
+    Provides utility methods for managing sound recording, playlist creation, and manipulation.
+    """
     def __init__(self):
         pass
-    
 
     def toggle_record_sound(self,soundplayer):
-        print("working")
+        """
+        Toggles recording of sound.
+
+        Parameters:
+            soundplayer: The sound player object.
+        """
         if not soundplayer.recording_in_progress:
             self.start_recording(soundplayer)
             soundplayer.recording_in_progress = True  # Update flag
@@ -23,7 +31,12 @@ class Tools:
             soundplayer.recording_in_progress = False  # Update flag
 
     def start_recording(self,soundplayer):
-        # Define the recording parameters
+        """
+        Starts recording sound.
+
+        Parameters:
+            soundplayer: The sound player object.
+        """
         self.duration = 10  # Recording duration in seconds
         self.sample_rate = 44100  # Sample rate (samples per second)
         self.channels = 1  # Number of audio channels (1 for mono, 2 for stereo)
@@ -34,7 +47,12 @@ class Tools:
         soundplayer.record_sound_button.configure(text="Stop Recording")
 
     def stop_recording(self,soundplayer):
-        # Stop recording
+        """
+        Stops recording sound and saves the recording.
+
+        Parameters:
+            soundplayer: The sound player object.
+        """
         sd.wait()
 
         # Save the recorded audio to a WAV file in the "sounds" folder
@@ -51,7 +69,14 @@ class Tools:
         #soundplayer.update_sounds("All_Sounds")
 
     def on_add_sound_to_playlist(self, playlist_path, playlist_name, soundplayer):
-        
+        """
+        Adds sound files to a playlist.
+
+        Parameters:
+            playlist_path: The path to the playlist folder.
+            playlist_name: The name of the playlist.
+            soundplayer: The sound player object.
+        """
         sound_files = filedialog.askopenfilenames(
         title="Add Sounds to Playlist",
         initialdir="sounds",  # Optionally start in the sounds folder
@@ -68,7 +93,15 @@ class Tools:
                     tkinter.messagebox.showerror("Error", f"Failed to copy {file}: {err}") 
 
     def create_playlist_folder(self, soundplayer):
+        """
+        Creates a new playlist folder.
 
+        Parameters:
+            soundplayer: The sound player object.
+
+        Returns:
+            The path to the created playlist folder and the name of the playlist.
+        """
         playlist_name = tk.simpledialog.askstring("Create Playlist", "Enter a name for your playlist:")
         #need to keep track of the playlists created. 
         
@@ -87,10 +120,15 @@ class Tools:
             except FileExistsError:
                 tkinter.messagebox.showerror("Error", f"Playlist '{playlist_name}' already exists.")
                 button.destroy()
-
         return None 
 
     def on_create_playlist(self, soundplayer):
+        """
+        Handles the creation of a new playlist.
+
+        Parameters:
+            soundplayer: The sound player object.
+        """
         playlist_path, playlist_name = self.create_playlist_folder(soundplayer)
         if playlist_path:
             self.on_add_sound_to_playlist(playlist_path, playlist_name ,soundplayer)
@@ -99,6 +137,12 @@ class Tools:
         pass
 
     def on_delete_playlist(self, soundplayer):
+        """
+        Handles the deletion of a playlist.
+
+        Parameters:
+            soundplayer: The sound player object.
+        """
         dialog = customtkinter.CTkInputDialog(text="Enter the name of the playlist to delete: ", title="Delete Playlist")
         playlist_name = dialog.get_input()
         if playlist_name in soundplayer.playlists:
@@ -109,7 +153,3 @@ class Tools:
                     widget.destroy()
         else:
             tkinter.messagebox.showerror("Error", f"Playlist '{playlist_name}' not found.")
- 
-
-
-
