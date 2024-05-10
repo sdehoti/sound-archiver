@@ -22,6 +22,10 @@ python3 gui.py
 <img width="1312" alt="IMG_4622" src="https://github.com/WhitmanCS370/GlobalUnited/assets/128567935/26e309ce-73c6-4dbc-bd6b-6d89275c15e3">
 
 
+## Reflection 
+
+**Challenges: ** Our biggest challenge in this project was implementing the GUI. We had difficulties getting accustomed to the Tkinter interface and because we wanted better customization over the GUI we decided also to use the customtkinter library. This proved to be difficult however we read the documentation and looked at the examples provided in the customtkinter GitHub repo to get a better feel of how everything interacts. We then slowly built our GUI frame by frame and got it to work, barely though. Our application right now is very slow because we did not implement threading hence all operations, including the expensive ones, are running on one main thread which significantly reduces the time it takes to render the UI after getting user input. Therefore sometimes the buttons take a couple of seconds to respond. In the future, we would like to resolve this problem and optimize our code better. 
+
 
 
 
