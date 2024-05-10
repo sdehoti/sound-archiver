@@ -3,7 +3,7 @@ CS370 Final Project for team Global United
 ## Team Members
 - Fabian: Contributed to sound_player, testing and share_file module.
   
-- Shahrom: Contributed to testing files, refactoring and adding features the sounds files and folders manipulations
+- Shahrom: Contributed to refactoring of code, adding features such as exporting in share_file.py and several file manager features. On top of that, I contributed to gui.py and player.py modules by adding features such as play options, export sounds and also have made changes to the design of the Player Controls component to ensure it renders correctly and integrates well with the overall design of the rest of the components.
   
 - Terence: Contributed to gui.py and tools.py.
   
