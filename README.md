@@ -1,12 +1,10 @@
 # GlobalUnited
 CS370 Final Project for team Global United
 ## Team Members
-- Fabian: Contributed to sound_player, testing and share_file module.
   
 - Shahrom: Contributed to refactoring of code, adding features such as exporting in share_file.py and several file manager features. On top of that, I contributed to gui.py and player.py modules by adding features such as play options, export sounds and also have made changes to the design of the Player Controls component to ensure it renders correctly and integrates well with the overall design of the rest of the components.
-- Fabian: In Epoch 2, I worked on the export sound feature using priamrily the zipfile and os modules. This way the users are able to export a group of sounds into a single zip file which can later be shared with other users. I also contributed to the refactoring and enhancement of the sound_player file and implemented error handling for the functions used in the backend to manipulate with the sound. In Epoch 3, I primarily worked on the GUI Player object in player.py and built a connection between Player and the backend. I have also implemented the sorting feature of the imported sounds in the Sounds section.
 
-- Shahrom: Contributed to testing files, refactoring and adding features the sounds files and folders manipulations
+- Fabian: In Epoch 2, I worked on the export sound feature using priamrily the zipfile and os modules. This way the users are able to export a group of sounds into a single zip file which can later be shared with other users. I also contributed to the refactoring and enhancement of the sound_player file and implemented error handling for the functions used in the backend to manipulate with the sound. In Epoch 3, I primarily worked on the GUI Player object in player.py and built a connection between Player and the backend. I have also implemented the sorting feature of the imported sounds in the Sounds section.
   
 - Terence: Contributed to gui.py and tools.py.
   
